@@ -1,0 +1,159 @@
+/* ==========================================================================
+   CASE-STUDY-MODAL.CSS
+   Popup that shows a PDF case study. Built on the site tokens only.
+   ========================================================================== */
+
+html.cs-lock {
+  overflow: hidden;
+}
+
+.cs-modal {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-chatbot) + 10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+}
+
+.cs-modal[hidden] {
+  display: none;
+}
+
+.cs-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity var(--transition-base) var(--ease-standard);
+}
+
+.cs-modal__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(1100px, 100%);
+  height: min(780px, 100%);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hover);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity var(--transition-base) var(--ease-out),
+    transform var(--transition-base) var(--ease-out);
+}
+
+.cs-modal.is-open .cs-modal__backdrop { opacity: 1; }
+.cs-modal.is-open .cs-modal__panel { opacity: 1; transform: none; }
+
+.cs-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.cs-modal__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cs-modal__title {
+  font-size: var(--fs-h3);
+  color: var(--foreground);
+}
+
+.cs-modal__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.cs-modal__btn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--foreground);
+  transition: background-color var(--transition-fast) var(--ease-standard),
+    border-color var(--transition-fast) var(--ease-standard);
+}
+
+.cs-modal__btn:hover {
+  background: var(--card-hover);
+  border-color: var(--accent);
+}
+
+.cs-modal__close {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  color: var(--foreground);
+  transition: background-color var(--transition-fast) var(--ease-standard);
+}
+
+.cs-modal__close:hover {
+  background: var(--card-hover);
+}
+
+.cs-modal__body {
+  flex: 1;
+  min-height: 0;
+  background: var(--background-elevated);
+}
+
+.cs-modal__frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--background-elevated);
+}
+
+.cs-modal__fallback {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .cs-modal { padding: 0; }
+
+  .cs-modal__panel {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: 0;
+  }
+
+  .cs-modal__header { padding: var(--space-3) var(--space-4); }
+  .cs-modal__title { font-size: var(--fs-body-lg); }
+  .cs-modal__btn { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-modal__backdrop,
+  .cs-modal__panel {
+    transition: none;
+  }
+}

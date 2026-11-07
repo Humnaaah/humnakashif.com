@@ -1,0 +1,606 @@
+/* ==========================================================================
+   BASE.CSS
+   Reset, root element defaults, typography defaults, generic utilities.
+   No section-specific styling lives here.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-primary);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-regular);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img,
+picture,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ---- Headings ---- */
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-tight);
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+p {
+  color: var(--muted);
+}
+
+/* ---- Layout primitives ---- */
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-desktop);
+}
+
+.section {
+  padding-block: var(--section-spacing-desktop);
+  position: relative;
+  scroll-margin-top: 130px;
+}
+
+/* ---- Two-tone heading ----
+   The reference's recurring heading pattern: a muted, regular-weight
+   first line followed by a bold, full-contrast second line/phrase.
+   Used across Services, About, Testimonials, FAQ, and the Footer —
+   built as two <span> wrappers around the section's *existing* copy
+   so no wording changes, only how the two halves are colored/weighted. */
+
+.heading-duo {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: 1.1;
+  letter-spacing: var(--ls-tight);
+}
+
+.heading-duo__muted {
+  display: block;
+  color: var(--muted);
+  font-weight: var(--fw-regular);
+}
+
+.heading-duo__bold {
+  display: block;
+  color: var(--foreground);
+  font-weight: var(--fw-bold);
+}
+
+.section-heading {
+  max-width: 640px;
+  margin-bottom: var(--space-8);
+}
+
+.section-heading__eyebrow {
+  display: inline-block;
+  font-size: var(--fs-small);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+
+.section-heading__title {
+  color: var(--foreground);
+}
+
+.section-heading__description {
+  margin-top: var(--space-4);
+  font-size: var(--fs-body-lg);
+}
+
+/* ---- Buttons ----
+   Structural styles only — hover/motion treatment arrives with
+   animations.css in a later phase. */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  transition: background-color var(--transition-fast) var(--ease-standard),
+    color var(--transition-fast) var(--ease-standard),
+    transform var(--transition-fast) var(--ease-standard);
+}
+
+.btn--primary {
+  background: var(--gradient-primary);
+  color: var(--accent-foreground);
+  box-shadow: 0 4px 14px -4px rgba(79, 70, 229, 0.45);
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -6px rgba(79, 70, 229, 0.55);
+  filter: brightness(1.06);
+}
+
+[data-theme="dark"] .btn--primary {
+  box-shadow: 0 4px 18px -4px rgba(129, 140, 248, 0.4);
+}
+
+[data-theme="dark"] .btn--primary:hover {
+  box-shadow: 0 12px 28px -6px rgba(129, 140, 248, 0.5);
+}
+
+.btn--secondary {
+  background-color: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border-strong);
+}
+
+.btn--secondary:hover {
+  background-color: var(--card-hover);
+  border-color: var(--accent);
+}
+
+.btn--pill-avatar {
+  padding-left: var(--space-2);
+}
+
+.btn__avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.btn__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Card primitive ---- */
+
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+/* ---- Chip / tag primitive ---- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  font-size: var(--fs-small);
+  color: var(--foreground);
+}
+
+/* ---- Avatar stack (used in hero + trusted-clients) ---- */
+
+.avatar-stack {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-stack__item {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 2px;
+  background: var(--gradient-primary);
+  box-shadow: 0 0 0 2px var(--background);
+  overflow: hidden;
+  margin-left: -12px;
+}
+
+.avatar-stack__item:first-child {
+  margin-left: 0;
+}
+
+.avatar-stack__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ---- Visually-hidden utility (accessibility) ---- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Skip link ---- */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  background: var(--accent);
+  color: var(--accent-foreground);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-sm);
+  z-index: var(--z-modal);
+  transition: top var(--transition-fast) var(--ease-standard);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* ---- Focus visibility (accessibility requirement) ---- */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Elements that sit on a dark/inverted surface regardless of the
+   active theme (footer, the black pricing/"Single Project" card, the
+   photo-backed "Next Project" link) need a focus ring that stays
+   visible against that dark background — the default accent ring
+   falls to ~2.7:1 there, under the 3:1 WCAG 1.4.11 minimum for
+   non-text UI contrast. Paired with a soft dark halo so the ring also
+   reads clearly over arbitrary photo content, not just flat color. */
+.footer :is(a, button):focus-visible,
+.pricing-card--project :is(a, button):focus-visible,
+.project-next:focus-visible,
+.experience__social-link:focus-visible,
+.footer__social-link:focus-visible {
+  outline-color: #fff;
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.55);
+}
+
+/* ---- Motion (accessibility requirement) ----
+   A single, comprehensive kill-switch: when the user has asked their
+   OS/browser for reduced motion, every animation and transition on
+   the site (marquees, glows, pulses, hover transforms, scroll
+   reveals) collapses to effectively instant rather than being
+   patched animation-by-animation across every stylesheet. Infinite
+   animations (marquees, the copilot pulse) are forced to a single,
+   near-instant iteration so they land on their end state instead of
+   looping. See WCAG 2.3.3 (Animation from Interactions) and 2.2.2
+   (Pause, Stop, Hide). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   BLOG CARDS
+   No dedicated blog.css exists in the planned file architecture — these
+   live here since they're a single reusable card component, same as
+   .card/.chip above.
+   ========================================================================== */
+
+.blog__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-7);
+}
+
+.blog__view-all {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--foreground);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-1);
+  transition: border-color var(--transition-fast) var(--ease-standard);
+}
+
+.blog__view-all:hover {
+  border-color: var(--accent);
+}
+
+.blog__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.blog-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  overflow: hidden;
+  transition: transform var(--transition-base) var(--ease-out),
+    border-color var(--transition-base) var(--ease-standard),
+    box-shadow var(--transition-base) var(--ease-out);
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card);
+}
+
+.blog-card a {
+  display: block;
+}
+
+.blog-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.blog-card:hover img {
+  transform: scale(1.06);
+}
+
+.blog-card__meta {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-5) 0;
+  font-size: var(--fs-micro);
+  color: var(--muted);
+}
+
+.blog-card__title {
+  padding: var(--space-3) var(--space-5) 0;
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-medium);
+  color: var(--foreground);
+}
+
+.blog-card__description {
+  padding: var(--space-3) var(--space-5) var(--space-5);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   TRUSTED CLIENTS (structural — marquee motion lives in animations.css)
+   ========================================================================== */
+
+.trusted-clients.section {
+  padding-block: 0;
+}
+
+.trusted-clients__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.trusted-clients__proof {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.trusted-clients__rating {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.trusted-clients__stars {
+  display: flex;
+  gap: 2px;
+  color: var(--foreground);
+}
+
+.trusted-clients__logos-row {
+  flex: 1;
+  min-width: 0;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.trusted-clients__logo {
+  height: 22px;
+  width: auto;
+  flex-shrink: 0;
+  color: var(--muted);
+  opacity: 0.7;
+  filter: grayscale(1);
+  transition: opacity var(--transition-fast) var(--ease-standard),
+    filter var(--transition-fast) var(--ease-standard);
+}
+
+.trusted-clients__logo:hover {
+  opacity: 1;
+  filter: grayscale(0);
+}
+
+.trusted-clients .avatar-stack {
+  width: fit-content;
+}
+
+.trusted-clients__count {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.trusted-clients__count strong {
+  color: var(--foreground);
+}
+/* ---- Theme switch transition ----
+   Applied only while `html.theme-transitioning` is present (added by
+   theme.js right before flipping [data-theme], removed ~400ms later).
+   Scoping it to a temporary class — rather than adding these
+   properties globally and permanently — means it doesn't fight with
+   each component's own carefully-tuned hover transitions the rest of
+   the time. !important is intentional here: it's a brief, deliberate
+   override of per-component transition durations so every surface on
+   the page recolors in visual unison instead of at different speeds. */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: background-color 0.4s var(--ease-standard),
+    color 0.4s var(--ease-standard),
+    border-color 0.4s var(--ease-standard),
+    box-shadow 0.4s var(--ease-standard) !important;
+}
+
+/* ---- Reduced motion baseline ----
+   Full animation rules land in animations.css (Phase 12), but the
+   media query contract is established here so nothing added later
+   can accidentally skip it. */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ==========================================================================
+   SHARED DISPLAY TYPE (used by the redesigned sections)
+   Big, tight sans + a Lora-italic accent phrase.
+   ========================================================================== */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-4);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+}
+
+.display {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-semibold);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.display__muted { display: block; color: var(--muted); font-weight: var(--fw-regular); }
+.display__bold  { display: block; color: var(--foreground); }
+
+.display em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  padding-right: 0.08em;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent);
+}

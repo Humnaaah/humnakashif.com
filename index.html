@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    // Runs synchronously, before any stylesheet, to prevent a flash of
+    // the wrong theme on load. Kept inline (not in theme.js) precisely
+    // because it must block first paint — a deferred external script
+    // would run too late and the page would visibly flip themes.
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme =
+          stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+        if (localStorage.getItem("motion") === "paused") document.documentElement.setAttribute("data-motion", "paused");
+      } catch (e) {
+        // localStorage/matchMedia unavailable (privacy mode, very old
+        // browser) — fall back silently to the light default already
+        // established by :root.
+      }
+    })();
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Humna Kashif | Senior UI/UX &amp; Product Designer | Frontend Developer</title>
+  <meta name="description" content="Humna Kashif is a Senior UI/UX and Product Designer and Frontend Developer with 7+ years of experience across SaaS, AI, enterprise, government, healthcare and e-commerce products. Skilled in UX research, design systems, React, JavaScript and CMS development." />
+  <meta name="author" content="Humna Kashif" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#fafaf9" />
+  <link rel="canonical" href="https://humnaaah.github.io/Portfolio/" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="Humna Kashif — Product Designer &amp; Frontend Developer" />
+  <meta property="og:description" content="7+ years creating user-centred digital products, scalable design systems and responsive web experiences, from Figma to frontend." />
+  <meta property="og:image" content="assets/images/profile.webp" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Humna Kashif — Product Designer &amp; Frontend Developer" />
+  <meta name="twitter:description" content="7+ years creating user-centred digital products, scalable design systems and responsive web experiences, from Figma to frontend." />
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Humna Kashif",
+    "jobTitle": "Senior UI/UX Designer, Product Designer and Frontend Developer",
+    "description": "Humna Kashif is a Senior UI/UX and Product Designer and Frontend Developer with 7+ years of experience across SaaS, AI, enterprise, government, healthcare and e-commerce products. Skilled in UX research, design systems, React, JavaScript and CMS development.",
+    "email": "mailto:humnakashif9@gmail.com",
+    "telephone": "+971557114804",
+    "url": "https://humnaaah.github.io/Portfolio",
+    "sameAs": [
+      "https://linkedin.com/in/humna-kashif"
+    ],
+    "knowsAbout": [
+      "UX/UI Design",
+      "Product Design",
+      "UX Research",
+      "Interaction Design",
+      "Design Systems",
+      "AI Product Design",
+      "Conversational UX",
+      "AI Agent Interfaces",
+      "React.js",
+      "JavaScript",
+      "TypeScript",
+      "HTML5",
+      "CSS3",
+      "WordPress",
+      "Shopify",
+      "Webflow",
+      "Technical SEO",
+      "Accessibility"
+    ],
+    "image": "assets/images/profile.webp"
+  }
+}
+  </script>
+  <link rel="preload" href="assets/fonts/inter-500.woff" as="font" type="font/woff" crossorigin />
+
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/projects.css" />
+  <link rel="stylesheet" href="css/ai-experience.css" />
+  <link rel="stylesheet" href="css/experience.css" />
+  <link rel="stylesheet" href="css/faq.css" />
+  <link rel="stylesheet" href="css/contact-slider.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/copilot.css" />
+    <link rel="stylesheet" href="css/case-study-modal.css" />
+  <link rel="stylesheet" href="css/system.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <noscript><style>.reveal-on-scroll,.reveal-up,.reveal-left,.reveal-right,.reveal-scale{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="nav" data-nav>
+    <div class="nav__inner">
+      <a class="nav__logo" href="index.html" aria-label="Humna Kashif — home">
+        <span class="nav__logo-avatar"><img src="assets/images/profile-small.webp" alt="" width="36" height="36" /></span>
+        <span>Humna Kashif</span>
+      </a>
+
+      <nav class="nav__links" data-nav-links aria-label="Primary">
+        <ul>
+          <li><a href="#projects">Work</a></li>
+          <!-- <li><a href="#expertise">Expertise</a></li> -->
+          <li><a href="#ai-experience">AI UX</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn btn--secondary nav__contact" href="#contact">Contact</a>
+
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode">
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.75" /><path d="M12 2.5V5M12 19V21.5M4.22 4.22L6 6M18 18L19.78 19.78M2.5 12H5M19 12H21.5M4.22 19.78L6 18M18 6L19.78 4.22" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" /></svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a7 7 0 0 0 10.7 10.7Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" /></svg>
+      </button>
+
+      <div class="nav__more" data-nav-more-wrap>
+        <button class="nav__more-trigger" type="button" data-nav-more aria-haspopup="true" aria-expanded="false" aria-label="Open navigation menu">
+          <span class="nav__more-dot" aria-hidden="true"></span><span class="nav__more-dot" aria-hidden="true"></span><span class="nav__more-dot" aria-hidden="true"></span>
+        </button>
+        <div class="nav__more-menu" data-nav-more-menu>
+          <ul>
+            <li><a href="#projects">Work</a></li>
+            <!-- <li><a href="#expertise">Expertise</a></li> -->
+            <li><a href="#ai-experience">AI UX</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+          </ul>
+         <div class="nav__more-menu-footer">
+  <a class="btn btn--secondary nav__contact" href="#contact">Contact</a>
+  <button class="theme-toggle theme-toggle--menu" type="button" data-theme-toggle aria-label="Switch to dark mode">
+    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.75" /><path d="M12 2.5V5M12 19V21.5M4.22 4.22L6 6M18 18L19.78 19.78M2.5 12H5M19 12H21.5M4.22 19.78L6 18M18 6L19.78 4.22" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" /></svg>
+    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a7 7 0 0 0 10.7 10.7Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" /></svg>
+  </button>
+</div>
+        </div>
+      </div>
+
+      <button class="nav__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span class="nav__toggle-bar"></span><span class="nav__toggle-bar"></span></button>
+    </div>
+
+    <div id="mobile-menu" class="nav__mobile" data-nav-mobile hidden>
+      <ul>
+        <li><a href="#projects">Work</a></li>
+        <!-- <li><a href="#expertise">Expertise</a></li> -->
+        <li><a href="#ai-experience">AI UX</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero section" aria-labelledby="hero-heading">
+      <div class="hero__bg" aria-hidden="true"><span class="hero__orb hero__orb--a"></span><span class="hero__orb hero__orb--b"></span><span class="hero__grid-bg"></span></div>
+
+      <div class="container hero__grid">
+        <div class="hero__inner">
+          <p class="hero__eyebrow"><span class="hero__eyebrow-dot" aria-hidden="true"></span><span>Available for new projects</span></p>
+
+          <p class="hero__role"> <span> Senior UI/UX &amp; AI Product Designer | Frontend Developer</span></p>
+
+          <h1 id="hero-heading" class="hero__headline">
+            I design products and <span class="hero__headline-accent">build them too.</span>
+          </h1>
+
+          <p class="hero__description">UI/UX and product designer and frontend developer with 7+ years of experience, turning complex requirements into clear, accessible products, from research and design systems to AI-powered workflows and production code.</p>
+
+          <div class="hero__cta-group" data-hero-cta-group>
+            <a class="btn btn--primary hero__cta" href="#projects">View work <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a class="btn btn--secondary hero__cta" href="./assets/Humna_Kashif_AI_UX_Product_Designer.pdf" target="_blank">Download Resume  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"> <path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/> </svg></a>
+          </div>
+        </div>
+
+        <div class="hchat" data-hchat>
+          <section class="hchat__window" aria-labelledby="hchat-title">
+            <header class="hchat__bar">
+              <span class="hchat__avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 64 64" role="img" aria-label="AI assistant"><defs><clipPath id="oc"><circle cx="32" cy="32" r="30"/></clipPath><linearGradient id="ob" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4338ca"/><stop offset="1" stop-color="#0e7490"/></linearGradient><filter id="obl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter></defs><g clip-path="url(#oc)"><circle cx="32" cy="32" r="30" fill="url(#ob)"/><g filter="url(#obl)"><circle cx="20" cy="22" r="18" fill="#6366f1" opacity=".9"><animateTransform attributeName="transform" type="translate" values="0 0;24 14;8 26;0 0" dur="3.2s" repeatCount="indefinite"/></circle><circle cx="48" cy="20" r="16" fill="#22d3ee" opacity=".8"><animateTransform attributeName="transform" type="translate" values="0 0;-26 18;-10 8;0 0" dur="3.8s" repeatCount="indefinite"/></circle><circle cx="32" cy="52" r="16" fill="#0e7490"><animateTransform attributeName="transform" type="translate" values="0 0;16 -26;-18 -14;0 0" dur="3.5s" repeatCount="indefinite"/></circle></g></g><circle cx="32" cy="32" r="30" fill="none" stroke="#fff" stroke-opacity=".3"/><path d="M32 16l3.8 12.2L48 32l-12.2 3.8L32 48l-3.8-12.2L16 32l12.2-3.8z" fill="#fff"/></svg>
+                <!-- <img src="assets/images/profile-small.webp" alt="" width="36" height="36" /> -->
+              </span>
+              <div class="hchat__who">
+                <p class="hchat__title" id="hchat-title">Ask AI</p>
+                <p class="hchat__status"><span class="hchat__status-dot" aria-hidden="true"></span>Answers from the portfolio</p>
+              </div>
+            </header>
+
+            <div class="hchat__log" data-hchat-log role="log" aria-live="off" aria-label="Conversation with Humna Kashif's assistant" tabindex="0">
+              <!-- <div class="hmsg hmsg--user" data-seed><p>What can Humna help a product team deliver?</p></div>
+              <div class="hmsg hmsg--ai" data-seed>
+                <div class="hmsg__text"><p>I combine product design and frontend development: from understanding user needs and mapping workflows to designing interfaces, building responsive experiences and improving usability.</p></div>
+                <a class="hmsg__action" href="#projects">See the work <span aria-hidden="true">&rarr;</span></a>
+              </div> -->
+              <div class="hmsg hmsg--user" data-seed><p>What can Humna help a product team deliver?</p></div>
+<div class="hmsg hmsg--ai" data-seed>
+  <div class="hmsg__text"><p>I design and build digital products end to end: government platforms, healthcare apps, franchise systems and AI experiences, from research and UX to responsive, accessible frontends.</p></div>
+  <a class="hmsg__action" href="#projects">See the work <span aria-hidden="true">&rarr;</span></a>
+</div>
+            </div>
+
+            <!-- <div class="hchat__chips" data-hchat-chips role="group" aria-label="Suggested questions">
+              <button type="button" class="hchat__chip" data-intent="design" data-q="What does she design?">Design</button>
+              <button type="button" class="hchat__chip" data-intent="frontend" data-q="What does she build?">Build</button>
+              <button type="button" class="hchat__chip" data-intent="ai" data-q="How does she design AI experiences?">AI UX</button>
+              <button type="button" class="hchat__chip" data-intent="availability" data-q="Is she available?">Hire</button>
+            </div> -->
+            <div class="hchat__chips" data-hchat-chips role="group" aria-label="Suggested questions">
+            <button type="button" class="hchat__chip" data-intent="projects" data-q="Show me her strongest projects">Work</button>
+            <button type="button" class="hchat__chip" data-intent="government" data-q="Has she built government platforms?">Government</button>
+            <button type="button" class="hchat__chip" data-intent="ai" data-q="How does she design AI experiences?">AI UX</button>
+            <button type="button" class="hchat__chip" data-intent="availability" data-q="Is she available?">Hire</button>
+          </div>
+
+            <form class="hchat__form" data-hchat-form>
+              <label class="visually-hidden" for="hchat-input">Ask a question about Humna Kashif's work</label>
+              <input id="hchat-input" class="hchat__input" data-hchat-input type="text" autocomplete="off" placeholder="Ask about her design or code…" />
+              <button class="hchat__send" type="submit" aria-label="Send question"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </form>
+          </section>
+        </div>
+      </div>
+         <div id="expertise" class="expertise section" aria-labelledby="expertise-heading">
+      <div class="container">
+        <!-- <header class="sec-head">
+          <p class="eyebrow">Expertise</p>
+          <h2 id="expertise-heading" class="display">
+            <span class="display__muted">What I do,</span>
+            <span class="display__bold">end to <em>end.</em></span>
+          </h2>
+          <p class="sec-head__lead">One person who understands both how a product should work and how it gets built.</p>
+        </header> -->
+        <ul class="site-grid">
+          <li class="site-card reveal-on-scroll">
+            <span class="site-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="4" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="13" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="13" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg></span>
+            <p class="site-card__tag">Product &amp; UX</p>
+            <h3 class="site-card__title">Product &amp; UX Design</h3>
+            <p class="site-card__text">Simplifying complex journeys for enterprise and government platforms.</p>
+          </li>
+          <li class="site-card reveal-on-scroll" style="transition-delay:0.06s">
+            <span class="site-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+            <p class="site-card__tag">AI</p>
+            <h3 class="site-card__title">AI Product Design</h3>
+            <p class="site-card__text">AI agents, agentic workflows and conversational UX that keep people in control.</p>
+          </li>
+          <li class="site-card reveal-on-scroll" style="transition-delay:0.12s">
+            <span class="site-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <p class="site-card__tag">Frontend</p>
+            <h3 class="site-card__title">Frontend Development</h3>
+            <p class="site-card__text">Websites and products built from scratch in React, JavaScript and CMS platforms.</p>
+          </li>
+          <li class="site-card reveal-on-scroll" style="transition-delay:0.18s">
+            <span class="site-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4l8 4-8 4-8-4 8-4Z M4 12l8 4 8-4 M4 16l8 4 8-4" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+            <p class="site-card__tag">Systems</p>
+            <h3 class="site-card__title">Design Systems</h3>
+            <p class="site-card__text">Reusable components that keep UI consistent and speed up development.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+      <!-- <div class="container">
+        <ul class="hero__facts" aria-label="At a glance">
+          <li><strong>7+ years</strong><span>Of professional working experience</span></li>
+          <li><strong>Product &amp; AI UX</strong><span>Enterprise, government and healthcare</span></li>
+          <li><strong>Frontend development</strong><span>React, JavaScript and CMS platforms</span></li>
+          <li><strong>Design systems</strong><span>Reusable components for scalable builds</span></li>
+        </ul>
+      </div> -->
+    </section>
+    <section id="projects" class="projects section" aria-labelledby="projects-heading">
+      <div class="container">
+        <header class="sec-head">
+          <p class="eyebrow">Selected work</p>
+          <h2 id="projects-heading" class="display">
+            <span class="display__muted">Selected work,</span>
+            <span class="display__bold">built around <em>real users.</em></span>
+          </h2>
+          <p class="sec-head__lead">Enterprise, government, healthcare, fintech and e-commerce products. Client work under NDA is shown on request.</p>
+        </header>
+        <!-- <article class="case-feature reveal-on-scroll">
+          <a class="case-feature__media" href="project/operations-management-platform.html" tabindex="-1" aria-hidden="true"><img src="assets/images/project-ops.webp" alt="" width="1200" height="800" loading="lazy" /></a>
+          <div class="case-feature__body">
+            <p class="case-feature__kicker">Featured case study · Enterprise / Public sector</p>
+            <h3 class="case-feature__title">Operations Management Platform</h3>
+            <p class="case-feature__text">A platform concept focused on bringing operational workflows into one clear experience, helping teams navigate information, manage tasks and make informed decisions.</p>
+            <p class="case-feature__role">My role: Product Designer / UX/UI Designer · Concept case study</p>
+            <a class="btn btn--primary" href="project/operations-management-platform.html">Read the case study <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article> -->
+
+        <!-- <h3 class="projects__more-title">More projects</h3> -->
+        <div class="projects__grid projects__grid--static">
+          <article class="project-card reveal-on-scroll">
+            <a class="project-card__link" href="assets/case-studies/lawportal.pdf" data-case-study="assets/case-studies/lawportal.pdf" data-case-study-title="Laws and Decision Portal - Ministry of Justice" aria-haspopup="dialog">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true">
+                <img src="assets/images/law-portal.png" alt="" width="1200" height="800" loading="lazy" /> 
+                <!-- <span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> -->
+                <!-- <span class="project-card__tile-name">Government</span> -->
+              </div><span class="project-card__overlay-cta">Read case study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Ministry of Justice - Law Portal </h3>
+                  <p class="project-card__summary">A bilingual portal for the Ministry of Justice, that lets anyone search, understand and track the status of Kuwait’s laws.</p>
+                   <dl class="project-card__facts"><dt>Role</dt><dd>Lead UI/UX Designer</dd><dt>Sector</dt><dd>Government and legal tech (Ministry of Justice Kuwait) </dd><dt>Type</dt><dd>Web and mobile product with an admin tool</dd></dl><span class="visually-hidden">. View case study (PDF): Laws and Decision Portal </span>
+                </div>
+              </div>
+            </a>
+          </article>
+          <article class="project-card reveal-on-scroll">
+            <a class="project-card__link" href="assets/case-studies/habitus-case-study.pdf" data-case-study="assets/case-studies/habitus-case-study.pdf" data-case-study-title="Habitus: Habit Tracker, now with an AI coach" aria-haspopup="dialog">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true">
+                <img src="assets/images/30.jpg" alt="" width="1200" height="800" loading="lazy" /> 
+                <!-- <span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> -->
+                <!-- <span class="project-card__tile-name">Government</span> -->
+              </div><span class="project-card__overlay-cta">View Case Study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Habitus: Habit Tracker, now with an AI coach</h3>
+                  <p class="project-card__summary">Habitus turns habit tracking into guided progress: an AI coach that suggests what’s next, and you decide what happens.</p>
+                   <dl class="project-card__facts"><dt>Role</dt><dd>Senior Product Designer</dd><dt>Sector</dt><dd> Health & Fitness  </dd><dt>Type</dt><dd>Product design case study (desktop and mobile app)</dd></dl><span class="visually-hidden">. View case study (PDF): Habitus tracker with AI coach</span>
+                </div>
+              </div>
+            </a>
+          </article>
+          <article class="project-card reveal-on-scroll">
+            <a class="project-card__link" href="assets/case-studies/emax.pdf" data-case-study="assets/case-studies/emax.pdf" data-case-study-title="Emax: AI-Powered Franchise Platform" aria-haspopup="dialog">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true">
+                <img src="assets/images/emax.jpg" alt="" width="1200" height="800" loading="lazy" /> 
+                <!-- <span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> -->
+                <!-- <span class="project-card__tile-name">Government</span> -->
+              </div><span class="project-card__overlay-cta">View Case Study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Emax: AI-Powered Franchise Platform</h3>
+                  <p class="project-card__summary">A mobile ERP for franchise teams that brings updates, training, messaging and store management into one AI-powered app.</p>
+                   <dl class="project-card__facts"><dt>Role</dt><dd>Senior Product Designer</dd><dt>Sector</dt><dd> Franchise operations and retail (enterprise software)  </dd><dt>Type</dt><dd>ERP -  Mobile Application</dd></dl><span class="visually-hidden">. View case study (PDF): Law Portal Ministry of Justice  </span>
+                </div>
+              </div>
+            </a>
+          </article>
+            <article class="project-card reveal-on-scroll">
+            <a class="project-card__link" href="assets/case-studies/edible-arrangements.pdf" data-case-study="assets/case-studies/edible-arrangements.pdf" data-case-study-title="Edible Arrangements: Store Management System" aria-haspopup="dialog">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true">
+                <img src="assets/images/edible-arrangement-store-management.jpg" alt="" width="1200" height="800" loading="lazy" /> 
+                <!-- <span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> -->
+                <!-- <span class="project-card__tile-name">Government</span> -->
+              </div><span class="project-card__overlay-cta">View Case Study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Store Management System</h3>
+                  <p class="project-card__summary">A store dashboard and point-of-sale system for tracking orders, fulfilment and sales in one place.</p>
+                   <dl class="project-card__facts"><dt>Role</dt><dd>UI/UX Designer</dd><dt>Sector</dt><dd> Retail and E-commerce </dd><dt>Type</dt><dd> Web and tablet application </dd></dl><span class="visually-hidden">. View case study (PDF): Edible Arrangements - Store Management System </span>
+                </div>
+              </div>
+            </a>
+          </article>
+           <article class="project-card reveal-on-scroll">
+            <a class="project-card__link" href="https://web-dev.moj.gov.kw" target="_blank">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true">
+                <img src="assets/images/moj.svg" style="object-position: top;" alt="" width="1200" height="800" loading="lazy" /> 
+                <!-- <span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> -->
+                <!-- <span class="project-card__tile-name">Government</span> -->
+              </div>
+              <span class="project-card__overlay-cta">View Website<svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Ministry of Justice, Kuwait: Official Website</h3>
+                  <p class="project-card__summary">A bilingual government website that brings the Ministry of Justice’s digital services into one accessible place. </p>
+                   <dl class="project-card__facts"><dt>Role</dt><dd>UI/UX Designer and Frontend Developer </dd><dt>Sector</dt><dd> Government and public services (legal and justice)</dd><dt>Type</dt><dd> Government website (responsive web design and frontend development) </dd></dl><span class="visually-hidden">. View case study (PDF): Design System for the Ministry of Justice </span>
+                </div>
+              </div>
+            </a>
+          </article>
+            <article class="project-card reveal-on-scroll">
+            <a class="project-card__link" href="assets/case-studies/Design-system.pdf" data-case-study="assets/case-studies/Design-system.pdf" data-case-study-title="Tawtheeq: Design System for the Ministry of Justice" aria-haspopup="dialog">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true">
+                <img src="assets/images/cover-page.svg" style="object-position: left;" alt="" width="1200" height="800" loading="lazy" /> 
+                <!-- <span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> -->
+                <!-- <span class="project-card__tile-name">Government</span> -->
+              </div><span class="project-card__overlay-cta">View Case Study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Design System for the Ministry of Justice</h3>
+                  <p class="project-card__summary">A bilingual design system that keeps the Ministry of Justice’s digital products consistent and accessible. </p>
+                   <dl class="project-card__facts"><dt>Role</dt><dd>lead UI/UX Designer </dd><dt>Sector</dt><dd> Government and legal tech (Ministry of Justice, State of Kuwait) </dd><dt>Type</dt><dd> Design system and brand guidelines </dd></dl><span class="visually-hidden">. View case study (PDF): Design System for the Ministry of Justice </span>
+                </div>
+              </div>
+            </a>
+          </article>
+           <article class="project-card reveal-on-scroll">
+            <a class="project-card__link" href="https://web-dev.moj.gov.kw/adl-platform" target="_blank">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true">
+                <img src="assets/images/Home Page.svg" style="object-position: top;" alt="" width="1200" height="800" loading="lazy" /> 
+                <!-- <span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> -->
+                <!-- <span class="project-card__tile-name">Government</span> -->
+              </div>
+              <span class="project-card__overlay-cta">View Website<svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Adl Platform: Digital Services Portal (Ministry of Justice, Kuwait)</h3>
+                  <p class="project-card__summary">A single, searchable entry point to the Ministry of Justice’s digital services, in Arabic and English. </p>
+                   <dl class="project-card__facts"><dt>Role</dt><dd>UI/UX Designer and Frontend Developer </dd><dt>Sector</dt><dd> Government and public services (legal and justice)</dd><dt>Type</dt><dd> Web platform home page (government portal, responsive web design and frontend development) </dd></dl><span class="visually-hidden">. View case study (PDF): Design System for the Ministry of Justice </span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+           <article class="project-card reveal-on-scroll">
+            <a class="project-card__link" href="assets/case-studies/Naranga-web.pdf" data-case-study="assets/case-studies/Naranga-web.pdf" data-case-study-title="Naranga: Franchise Operations Management Website" aria-haspopup="dialog">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true">
+                <img src="assets/images/naranga.svg" style="object-position: top;" alt="" width="1200" height="800" loading="lazy" /> 
+                <!-- <span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> -->
+                <!-- <span class="project-card__tile-name">Government</span> -->
+              </div><span class="project-card__overlay-cta">View Case Study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Franchise Operations Management Website</h3>
+                  <p class="project-card__summary">A product website that presents a franchise operations platform and turns visitors into demo requests. </p>
+                   <dl class="project-card__facts"><dt>Role</dt><dd>UI/UX Designer and Frontend Developer </dd><dt>Sector</dt><dd> SaaS and franchise management (B2B) </dd><dt>Type</dt><dd> Marketing website (SaaS product site, responsive web design) </dd></dl><span class="visually-hidden">. View case study (PDF): Naranga - SaaS and franchise management (B2B) </span>
+                </div>
+              </div>
+            </a>
+          </article>
+           <article class="project-card reveal-on-scroll">
+            <a class="project-card__link" href="assets/case-studies/aibers-doc.pdf" data-case-study="assets/case-studies/aibers-doc.pdf" data-case-study-title="Aibers Doc: Doctor Dashboard" aria-haspopup="dialog">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true">
+                <img src="assets/images/Doc-web.jpg" alt="" width="1200" height="800" loading="lazy" /> 
+                <!-- <span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> -->
+                <!-- <span class="project-card__tile-name">Government</span> -->
+              </div><span class="project-card__overlay-cta">View Case Study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Aibers Doc: Doctor Dashboard</h3>
+                  <p class="project-card__summary">A doctor’s web dashboard for managing appointments, patients and prescriptions in real time. </p>
+                   <dl class="project-card__facts"><dt>Role</dt><dd>UI/UX Designer & Frontend Developer </dd><dt>Sector</dt><dd> Healthcare and health tech </dd><dt>Type</dt><dd> Web application (desktop dashboard) </dd></dl><span class="visually-hidden">. View case study (PDF): Doctor Dashboard </span>
+                </div>
+              </div>
+            </a>
+          </article>
+    <article class="project-card reveal-on-scroll">
+                <a class="project-card__link" href="assets/case-studies/brochure-design.pdf" data-case-study="assets/case-studies/brochure-design.pdf" data-case-study-title="Unicorn Digital Courtroom: Brochure Design" aria-haspopup="dialog">
+                  <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true">
+                    <img src="assets/images/Cover.svg" style="object-position: bottom;" alt="" width="1200" height="800" loading="lazy" /> 
+                    <!-- <span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> -->
+                    <!-- <span class="project-card__tile-name">Government</span> -->
+                  </div><span class="project-card__overlay-cta">View Case Study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+                  <div class="project-card__meta">
+                    <div>
+                      <h3 class="project-card__client">Unicorn Digital Courtroom: Brochure Design</h3>
+                      <p class="project-card__summary">A brochure that explains a hybrid digital courtroom platform clearly to legal and government buyers. </p>
+                      <dl class="project-card__facts"><dt>Role</dt><dd>Graphic & Brand Designer </dd><dt>Sector</dt><dd> Legal tech and government (digital courts, B2B) </dd><dt>Type</dt><dd> Print and digital brochure </dd></dl><span class="visually-hidden">. View case study (PDF): Brochure Design </span>
+                    </div>
+                  </div>
+                </a>
+              </article>
+
+             <article class="project-card reveal-on-scroll">
+            <a class="project-card__link" href="assets/case-studies/patient-app.pdf" data-case-study="assets/case-studies/patient-app.pdf" data-case-study-title="Aibers: Patient App" aria-haspopup="dialog">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true">
+                <img src="assets/images/aibers-patient.png" alt="" width="1200" height="800" loading="lazy" /> 
+                <!-- <span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> -->
+                <!-- <span class="project-card__tile-name">Government</span> -->
+              </div><span class="project-card__overlay-cta">View Case Study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Aibers: Patient App</h3>
+                  <p class="project-card__summary">A patient app for finding doctors, managing appointments and following up after visits. </p>
+                   <dl class="project-card__facts"><dt>Role</dt><dd>UI/UX Designer & Frontend Developer </dd><dt>Sector</dt><dd> Healthcare and health tech </dd><dt>Type</dt><dd> Mobile app (Android & IOS) </dd></dl><span class="visually-hidden">. View case study (PDF): Patient App </span>
+                </div>
+              </div>
+            </a>
+          </article>
+          <!-- <article class="project-card reveal-on-scroll project-card--pdf" style="transition-delay:0.08s">
+            <a class="project-card__link" href="assets/case-studies/habitus-case-study.pdf" data-case-study="assets/case-studies/habitus-case-study.pdf" data-case-study-title="Habitus: Habit Tracker, now with an AI coach" aria-haspopup="dialog">
+              <div class="project-card__media">
+                <img src="assets/images/30.jpg" alt="" width="1200" height="800" loading="lazy" /> 
+                <div class="project-card__tile" data-hue="1" aria-hidden="true"><span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="project-card__tile-name">Government service app</span></div>
+              <span class="project-card__overlay-cta">View case study
+                <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              
+              </span>
+              
+              <span class="project-card__badge">PDF</span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Habitus: Habit Tracker, now with an AI coach</h3>
+                  <p class="project-card__summary">Habitus turns habit tracking into guided progress: an AI coach that suggests what’s next, and you decide what happens.</p>
+                  <dl class="project-card__facts"><dt>Role</dt><dd>Lead Product Designer </dd><dt>Sector</dt><dd>Health & Fitness </dd><dt>Type</dt><dd>Product design case study (desktop and mobile app)</dd></dl><span class="visually-hidden">. View case study (PDF): Power of Attorney Services App</span>
+                </div>
+              </div>
+            </a>
+          </article> -->
+          <!-- <article class="project-card reveal-on-scroll project-card--pdf" style="transition-delay:0.08s">
+            <a class="project-card__link" href="assets/case-studies/emax.pdf" data-case-study="assets/case-studies/emax.pdf" data-case-study-title="Emax: AI-Powered Franchise Platform" aria-haspopup="dialog">
+              <div class="project-card__media">
+                <img src="assets/images/emax.jpg" alt="" width="1200" height="800" loading="lazy" /> 
+                <div class="project-card__tile" data-hue="1" aria-hidden="true"><span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9 9v9M15 9v9M19 9v9M3 20h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="project-card__tile-name">Financial Services</span></div>
+              <span class="project-card__overlay-cta">View case study
+                <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              
+              </span>
+              
+              <span class="project-card__badge">PDF</span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Emax: AI-Powered Franchise Platform </h3> 
+                  <p class="project-card__summary">A mobile ERP for franchise teams that brings updates, training, messaging and store management into one AI-powered app.</p>
+                  <dl class="project-card__facts"><dt>Role</dt><dd>AI Product Designer </dd><dt>Sector</dt><dd>Franchise operations and retail (enterprise software) </dd><dt>Type</dt><dd>ERP -  Mobile Application</dd></dl><span class="visually-hidden">. View case study (PDF): Power of Attorney Services App</span>
+                </div>
+              </div>
+            </a>
+          </article> -->
+          <!-- <article class="project-card reveal-on-scroll" style="transition-delay:0.16s">
+            <a class="project-card__link" href="project/moh-kuwait.html">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="2" aria-hidden="true"><span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6V4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span><span class="project-card__tile-name">Healthcare · Government</span></div><span class="project-card__overlay-cta">Read case study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Ministry of Health Kuwait</h3>
+                  <p class="project-card__summary">Healthcare service interfaces designed for clarity, accessibility and fast task completion.</p>
+                  <dl class="project-card__facts"><dt>Role</dt><dd>UX/UI Designer</dd><dt>Sector</dt><dd>Healthcare · Government</dd><dt>Type</dt><dd>Product Design</dd></dl><span class="visually-hidden">. Read case study: Ministry of Health Kuwait</span>
+                </div>
+              </div>
+            </a>
+          </article> -->
+          <!-- <article class="project-card reveal-on-scroll">
+            <a class="project-card__link" href="project/payoneer.html">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="3" aria-hidden="true"><span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.7"/></svg></span><span class="project-card__tile-name">Fintech</span></div><span class="project-card__overlay-cta">Read case study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Payoneer</h3>
+                  <p class="project-card__summary">Usability and interface consistency for a global payments platform.</p>
+                  <dl class="project-card__facts"><dt>Role</dt><dd>UX/UI Designer</dd><dt>Sector</dt><dd>Fintech</dd><dt>Type</dt><dd>Product Design</dd></dl><span class="visually-hidden">. Read case study: Payoneer</span>
+                </div>
+              </div>
+            </a>
+          </article> -->
+          <!-- <article class="project-card reveal-on-scroll project-card--pdf" style="transition-delay:0.08s">
+            <a class="project-card__link" href="assets/case-studies/edible.pdf" data-case-study="assets/case-studies/edible.pdf" data-case-study-title="Edible Arrangements — case study" aria-haspopup="dialog">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="0" aria-hidden="true"><span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 4h2l2.2 10.2a1 1 0 0 0 1 .8h8.6a1 1 0 0 0 1-.8L19 8H6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="19" r="1.3" fill="currentColor"/><circle cx="16.5" cy="19" r="1.3" fill="currentColor"/></svg></span><span class="project-card__tile-name">E-commerce</span></div><span class="project-card__overlay-cta">View case study (PDF) <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="project-card__badge">PDF</span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Edible Arrangements</h3>
+                  <p class="project-card__summary">UX and frontend improvements across e-commerce sites and franchise-management platforms, backed by reusable React components and a design system.</p>
+                  <dl class="project-card__facts"><dt>Role</dt><dd>UX Designer &amp; Frontend Developer</dd><dt>Sector</dt><dd>E-commerce</dd><dt>Type</dt><dd>Frontend Development</dd></dl><span class="visually-hidden">. View case study (PDF): Edible Arrangements</span>
+                </div>
+              </div>
+            </a>
+          </article> -->
+          <!-- <article class="project-card reveal-on-scroll" style="transition-delay:0.16s">
+            <a class="project-card__link" href="project/techunicorn.html">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="1" aria-hidden="true"><span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span><span class="project-card__tile-name">Enterprise · AI</span></div><span class="project-card__overlay-cta">Read case study <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">TechUnicorn / CXUnicorn</h3>
+                  <p class="project-card__summary">End-to-end UX for enterprise and government platforms, plus AI-powered workflows, conversational interfaces and agent experiences.</p>
+                  <dl class="project-card__facts"><dt>Role</dt><dd>Senior UI/UX Designer</dd><dt>Sector</dt><dd>Enterprise · AI</dd><dt>Type</dt><dd>AI UX</dd></dl><span class="visually-hidden">. Read case study: TechUnicorn / CXUnicorn</span>
+                </div>
+              </div>
+            </a>
+          </article> -->
+          <!-- <article class="project-card reveal-on-scroll project-card--pdf">
+            <a class="project-card__link" href="assets/case-studies/aibers.pdf" data-case-study="assets/case-studies/aibers.pdf" data-case-study-title="Aibers Healthcare Management System — case study" aria-haspopup="dialog">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="2" aria-hidden="true"><span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6V4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span><span class="project-card__tile-name">Healthcare</span></div><span class="project-card__overlay-cta">View case study (PDF) <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="project-card__badge">PDF</span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Aibers Healthcare Management System</h3>
+                  <p class="project-card__summary">Healthcare management portals and dashboards, designed and built as accessible, responsive interfaces.</p>
+                  <dl class="project-card__facts"><dt>Role</dt><dd>UI/UX Designer &amp; Frontend Developer</dd><dt>Sector</dt><dd>Healthcare</dd><dt>Type</dt><dd>Frontend Development</dd></dl><span class="visually-hidden">. View case study (PDF): Aibers Healthcare Management System</span>
+                </div>
+              </div>
+            </a>
+          </article> -->
+          <!-- <article class="project-card reveal-on-scroll project-card--pdf" style="transition-delay:0.08s">
+            <a class="project-card__link" href="assets/case-studies/gameboggy-aoyo.pdf" data-case-study="assets/case-studies/gameboggy-aoyo.pdf" data-case-study-title="Gameboggy and Aoyo — case study" aria-haspopup="dialog">
+              <div class="project-card__media"><div class="project-card__tile" data-hue="3" aria-hidden="true"><span class="project-card__tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span><span class="project-card__tile-name">Social · Entertainment</span></div><span class="project-card__overlay-cta">View case study (PDF) <svg class="project-card__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="project-card__badge">PDF</span></div>
+              <div class="project-card__meta">
+                <div>
+                  <h3 class="project-card__client">Gameboggy and Aoyo</h3>
+                  <p class="project-card__summary">Responsive social and entertainment experiences: chat, forums, rich media and data dashboards.</p>
+                  <dl class="project-card__facts"><dt>Role</dt><dd>UI/UX Designer</dd><dt>Sector</dt><dd>Social · Entertainment</dd><dt>Type</dt><dd>Product Design</dd></dl><span class="visually-hidden">. View case study (PDF): Gameboggy and Aoyo</span>
+                </div>
+              </div>
+            </a>
+          </article> -->
+        </div>
+        <!-- <p class="projects__note">Client work under NDA is not shown publicly.</p> -->
+      </div>
+    </section>
+ 
+    <section id="ai-experience" class="ai-experience section" aria-labelledby="ai-experience-heading">
+      <div class="container">
+        <div class="ai-stage">
+          <span class="ai-stage__aurora" aria-hidden="true"></span>
+          <div class="ai-stage__head">
+            <p class="eyebrow eyebrow--light">Designing for the AI era</p>
+            <h2 id="ai-experience-heading" class="display display--light">
+              <span class="display__bold">AI that keeps</span>
+              <span class="display__bold ai-experience__headline-accent"><em>people in control.</em></span>
+            </h2>
+            <p class="ai-stage__intro">AI agents, agentic workflows, conversational UX and human–AI interaction, designed to remove friction while staying clear and user-controlled. Pick an everyday moment to see the difference.</p>
+          </div>
+
+          <div class="ai-ux" data-ai-ux>
+            <div class="ai-ux__tabs" role="tablist" aria-label="AI experience examples" data-ai-tabs>
+            <button type="button" class="ai-ux__tab is-active" role="tab" id="ai-tab-0" aria-controls="ai-panel-0" aria-selected="true">Find information faster</button>
+            <button type="button" class="ai-ux__tab" role="tab" id="ai-tab-1" aria-controls="ai-panel-1" aria-selected="false" tabindex="-1">Understand long content</button>
+            <button type="button" class="ai-ux__tab" role="tab" id="ai-tab-2" aria-controls="ai-panel-2" aria-selected="false" tabindex="-1">Reduce repetitive entry</button>
+            <button type="button" class="ai-ux__tab" role="tab" id="ai-tab-3" aria-controls="ai-panel-3" aria-selected="false" tabindex="-1">Make setup easier</button>
+            </div>
+          <div class="ai-ux__panel is-in" role="tabpanel" id="ai-panel-0" aria-labelledby="ai-tab-0" tabindex="0">
+            <div class="ai-ux__compare">
+              <div class="ai-ux__col ai-ux__col--before">
+                <p class="ai-ux__label">Without AI <span class="ai-ux__count">5 steps</span></p>
+                <ol class="ai-ux__steps"><li style="--i:0"><span class="ai-ux__strike">Open the filters</span></li><li style="--i:1"><span class="ai-ux__strike">Pick a category</span></li><li style="--i:2"><span class="ai-ux__strike">Set a date range</span></li><li style="--i:3"><span class="ai-ux__strike">Choose a sort order</span></li><li style="--i:4"><span class="ai-ux__strike">Start over when it's wrong</span></li></ol>
+              </div>
+              <div class="ai-ux__arrow" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="ai-ux__col ai-ux__col--after">
+                <p class="ai-ux__label ai-ux__label--ai"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg> With AI <span class="ai-ux__count ai-ux__count--ai">1 step</span></p>
+                <p class="ai-ux__step-label">You ask</p>
+                <p class="ai-ux__prompt"><span class="ai-ux__prompt-you">You</span>Show unpaid invoices from last month.</p>
+                <p class="ai-ux__step-label">AI answers</p>
+                <div class="ai-ux__result">
+                  <p class="ai-ux__result-title">14 unpaid invoices from September</p>
+                  <ul class="ai-ux__result-lines"><li>Sorted with the oldest first</li></ul>
+                </div>
+              </div>
+            </div>
+            <p class="ai-ux__decision"><span class="ai-ux__decision-label">Why it works</span>People ask in their own words instead of setting filters, and the screen shows what the AI understood so they can correct it.</p>
+          </div>
+          <div class="ai-ux__panel" role="tabpanel" id="ai-panel-1" aria-labelledby="ai-tab-1" tabindex="0" hidden>
+            <div class="ai-ux__compare">
+              <div class="ai-ux__col ai-ux__col--before">
+                <p class="ai-ux__label">Without AI <span class="ai-ux__count">4 steps</span></p>
+                <ol class="ai-ux__steps"><li style="--i:0"><span class="ai-ux__strike">Open the 40-page report</span></li><li style="--i:1"><span class="ai-ux__strike">Read all of it</span></li><li style="--i:2"><span class="ai-ux__strike">Pull out the key points</span></li><li style="--i:3"><span class="ai-ux__strike">Copy them into a doc</span></li></ol>
+              </div>
+              <div class="ai-ux__arrow" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="ai-ux__col ai-ux__col--after">
+                <p class="ai-ux__label ai-ux__label--ai"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg> With AI <span class="ai-ux__count ai-ux__count--ai">1 step</span></p>
+                <p class="ai-ux__step-label">You ask</p>
+                <p class="ai-ux__prompt"><span class="ai-ux__prompt-you">You</span>Summarize the key risks.</p>
+                <p class="ai-ux__step-label">AI answers</p>
+                <div class="ai-ux__result">
+                  <p class="ai-ux__result-title">3 key risks found</p>
+                  <ul class="ai-ux__result-lines"><li>Renewals dropped in two customer segments (p.4)</li><li>Support backlog is growing week over week (p.12)</li><li>One vendor contract expires next quarter (p.27)</li></ul>
+                </div>
+              </div>
+            </div>
+            <p class="ai-ux__decision"><span class="ai-ux__decision-label">Why it works</span>A short summary with page references, so people can check the source.</p>
+          </div>
+          <div class="ai-ux__panel" role="tabpanel" id="ai-panel-2" aria-labelledby="ai-tab-2" tabindex="0" hidden>
+            <div class="ai-ux__compare">
+              <div class="ai-ux__col ai-ux__col--before">
+                <p class="ai-ux__label">Without AI <span class="ai-ux__count">4 steps</span></p>
+                <ol class="ai-ux__steps"><li style="--i:0"><span class="ai-ux__strike">Type your name and address</span></li><li style="--i:1"><span class="ai-ux__strike">Upload the same documents again</span></li><li style="--i:2"><span class="ai-ux__strike">Re-enter company details</span></li><li style="--i:3"><span class="ai-ux__strike">Check everything for typos</span></li></ol>
+              </div>
+              <div class="ai-ux__arrow" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="ai-ux__col ai-ux__col--after">
+                <p class="ai-ux__label ai-ux__label--ai"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg> With AI <span class="ai-ux__count ai-ux__count--ai">1 step</span></p>
+                <p class="ai-ux__step-label">You ask</p>
+                <p class="ai-ux__prompt"><span class="ai-ux__prompt-you">You</span>Use my details from the last application.</p>
+                <p class="ai-ux__step-label">AI answers</p>
+                <div class="ai-ux__result">
+                  <p class="ai-ux__result-title">9 of 12 fields filled in</p>
+                  <ul class="ai-ux__result-lines"><li>Name, address and company details added</li><li>3 fields need a quick check</li></ul>
+                </div>
+              </div>
+            </div>
+            <p class="ai-ux__decision"><span class="ai-ux__decision-label">Why it works</span>Fill in what is already known and clearly mark what still needs a person to check.</p>
+          </div>
+          <div class="ai-ux__panel" role="tabpanel" id="ai-panel-3" aria-labelledby="ai-tab-3" tabindex="0" hidden>
+            <div class="ai-ux__compare">
+              <div class="ai-ux__col ai-ux__col--before">
+                <p class="ai-ux__label">Without AI <span class="ai-ux__count">4 steps</span></p>
+                <ol class="ai-ux__steps"><li style="--i:0"><span class="ai-ux__strike">Read the setup guide</span></li><li style="--i:1"><span class="ai-ux__strike">Go through a 7-step wizard</span></li><li style="--i:2"><span class="ai-ux__strike">Configure each setting</span></li><li style="--i:3"><span class="ai-ux__strike">Invite the team one by one</span></li></ol>
+              </div>
+              <div class="ai-ux__arrow" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="ai-ux__col ai-ux__col--after">
+                <p class="ai-ux__label ai-ux__label--ai"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg> With AI <span class="ai-ux__count ai-ux__count--ai">1 step</span></p>
+                <p class="ai-ux__step-label">You ask</p>
+                <p class="ai-ux__prompt"><span class="ai-ux__prompt-you">You</span>Set this up for a 5-person design team.</p>
+                <p class="ai-ux__step-label">AI answers</p>
+                <div class="ai-ux__result">
+                  <p class="ai-ux__result-title">Workspace ready to review</p>
+                  <ul class="ai-ux__result-lines"><li>5 seats and roles set</li><li>3 starter templates added</li><li>Invites drafted, not sent</li></ul>
+                </div>
+              </div>
+            </div>
+            <p class="ai-ux__decision"><span class="ai-ux__decision-label">Why it works</span>The AI does the setup work, but nothing is sent until the person reviews it.</p>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="funnel" class="funnel-section section" aria-labelledby="funnel-heading">
+      <div class="container">
+        <div>
+          <header class="sec-head">
+          <p class="eyebrow">How I work</p>
+          <h2 id="funnel-heading" class="display">
+            <span class="display__muted">From problem</span>
+            <span class="display__bold">to <em>shipped product.</em></span>
+          </h2>
+        </header>
+          <ol class="funnel">
+            <li class="funnel__step reveal-on-scroll">
+              <span class="funnel__num">01</span>
+              <h3 class="funnel__title">Discover</h3>
+              <p class="funnel__text">Understand business goals, user needs, constraints and existing workflows through stakeholder discussions and research.</p>
+            </li>
+            <li class="funnel__step reveal-on-scroll" style="transition-delay:0.06s">
+              <span class="funnel__num">02</span>
+              <h3 class="funnel__title">Define and design</h3>
+              <p class="funnel__text">Map journeys, structure information, create wireframes and prototypes, and develop consistent UI systems.</p>
+            </li>
+            <li class="funnel__step reveal-on-scroll" style="transition-delay:0.12s">
+              <span class="funnel__num">03</span>
+              <h3 class="funnel__title">Build and collaborate</h3>
+              <p class="funnel__text">Translate designs into responsive interfaces, work with engineering teams and support implementation.</p>
+            </li>
+            <li class="funnel__step reveal-on-scroll" style="transition-delay:0.18s">
+              <span class="funnel__num">04</span>
+              <h3 class="funnel__title">Test and improve</h3>
+              <p class="funnel__text">Review usability, accessibility, performance and analytics; iterate based on evidence and feedback.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+    <section id="about" class="about section" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="outcomes__head sec-head">
+          <p class="eyebrow">About</p>
+          <h2 id="about-heading" class="display">
+            <span class="display__muted">Hi, I’m Humna.</span>
+            <span class="display__bold">I design it and <em>build it too.</em></span>
+          </h2>
+        </div>
+
+        <div class="about__layout">
+          <aside class="about__profile reveal-on-scroll">
+            <div class="about__photo"><img src="assets/images/humna-kashif.png" alt="Portrait of Humna Kashif" width="480" height="480" loading="lazy" /></div>
+            <h3 class="about__name">Humna Kashif</h3>
+            <p class="about__title">UI/UX Designer &amp; Frontend Developer</p>
+            <ul class="about__meta" aria-label="At a glance"><li>7+ years</li><li>AI Product Design</li><li>UI/UX Design</li><li>Frontend Development</li></ul>
+          </aside>
+
+          <div class="about__content">
+            <p class="about__lead reveal-on-scroll"><strong>Complex products don’t need complicated experiences.</strong> I make them clear, accessible and ready to build.</p>
+            <p class="about__body reveal-on-scroll">My background spans UX research, interface design, design systems, AI-enabled workflows and frontend implementation. I also create presentations and business materials that support lead generation.</p>
+            <h3 class="outcomes__how-label about__history-label">Where I’ve worked</h3>
+           <ol class="timeline" aria-label="Work history">
+            <li class="timeline__item reveal-on-scroll">
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <div class="timeline__head">
+                <h4 class="timeline__company">Teamroids | Dubai, UAE </h4>
+                <p class="timeline__dates"><time datetime="YYYY-MM">Nov 2024</time> – Present</p>
+              </div>
+              <p class="timeline__role">UI/UX Designer · Frontend CMS Specialist</p>
+              <p class="timeline__text">Designing e-commerce stores, dashboards and web apps for client teams, then building them on CMS platforms, from user flows to polished, responsive UI.</p>
+            </li>
+
+            <li class="timeline__item reveal-on-scroll">
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <div class="timeline__head">
+                <h4 class="timeline__company">TechUnicorn / CXUnicorn | Dubai, UAE</h4>
+                <p class="timeline__dates"><time datetime="YYYY-MM">Aug 2025</time> – <time datetime="YYYY-MM">May 2026</time></p>
+              </div>
+              <p class="timeline__role">Senior UI/UX Designer · Product Designer</p>
+              <p class="timeline__text">Led UX for enterprise, government and legal-tech platforms and AI-powered workflows, and built the design systems behind them. Also delivered Shopify and Wix sites.</p>
+            </li>
+
+            <li class="timeline__item reveal-on-scroll">
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <div class="timeline__head">
+                <h4 class="timeline__company">Edible Arrangements | Islamabad, Pakistan </h4>
+                <p class="timeline__dates"><time datetime="YYYY-MM">Aug 2021</time> – <time datetime="YYYY-MM">Oct 2024</time></p>
+              </div>
+              <p class="timeline__role">Software Engineer · UI/UX Designer · Frontend Developer</p>
+              <p class="timeline__text">Designed and built the UX and React frontend for e-commerce sites and a franchise store management and point-of-sale system, backed by reusable components and a design system.</p>
+            </li>
+
+            <li class="timeline__item reveal-on-scroll">
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <div class="timeline__head">
+                <h4 class="timeline__company">Aibers  | Islamabad, Pakistan</h4>
+                <p class="timeline__dates"><time datetime="YYYY-MM">Jan 2021</time> – <time datetime="YYYY-MM">July 2021</time></p>
+              </div>
+              <p class="timeline__role">UI/UX Designer · Frontend Developer</p>
+              <p class="timeline__text">Designed and built a two-sided healthcare system: a patient app for appointments and follow-ups, and a doctor dashboard for queues, analytics and prescriptions.</p>
+            </li>
+
+            <li class="timeline__item reveal-on-scroll">
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <div class="timeline__head">
+                <h4 class="timeline__company">SAS Group of Companies | Islamabad, Pakistan</h4>
+                <p class="timeline__dates"><time datetime="YYYY-MM">Dec 2018 </time> – <time datetime="YYYY-MM">Dec 2020</time></p>
+              </div>
+              <p class="timeline__role">UI/UX Designer · Web Interface Developer</p>
+              <p class="timeline__text">Designed and built responsive web experiences and dashboards for social, entertainment and enterprise products.</p>
+            </li>
+
+            <li class="timeline__item reveal-on-scroll">
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <div class="timeline__head">
+                <h4 class="timeline__company">Nitro9 | Islamabad, Pakistan</h4>
+                <p class="timeline__dates"><time datetime="YYYY-MM">July 2018</time> – <time datetime="YYYY-MM">Nov 2018</time></p>
+              </div>
+              <p class="timeline__role">UI/UX Designer · WordPress Developer</p>
+              <p class="timeline__text">Designed and built WordPress websites for legal and e-commerce clients, from layout to launch.</p>
+            </li>
+          </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="testimonials" class="testimonials section band" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <header class="sec-head">
+          <p class="eyebrow">Kind words</p>
+          <h2 id="testimonials-heading" class="display">
+            <span class="display__bold">Kind words from <em>collaborators.</em></span>
+          </h2>
+        </header>
+        <p class="testimonials__sample">Sample content: replace these placeholders in index.html before publishing.</p>
+        <figure class="tfeature" data-tfeature>
+          <p class="tfeature__topic" data-tf-topic>Product design</p>
+          <blockquote class="tfeature__quote wdd-100" data-tf-quote aria-live="polite">&ldquo;
+							This Seller Rocks!!! Please do work with her she listen to everything I wanted and made it happen if you are tired of looking around and cant figure out who to chose just chose her she will help you get what you need done. Thank you so much Humna ksahif you did Excellent. And my project will be a success.
+						&rdquo;</blockquote>
+          <figcaption class="tfeature__who">
+            <span class="tcard__avatar tcard__avatar--lg" aria-hidden="true"><img src="./assets/images/Paulave.jpg"/></span>
+            <span><strong data-tf-name>Moreen</strong><span data-tf-role>United States of America</span></span>
+            <span class="tfeature__ctrl">
+              <span class="tfeature__count" data-tf-count>1 / 4</span>
+              <button type="button" class="tfeature__btn" data-tf-prev aria-label="Previous testimonial">&larr;</button>
+              <button type="button" class="tfeature__btn" data-tf-next aria-label="Next testimonial">&rarr;</button>
+            </span>
+          </figcaption>
+        </figure>
+        <ul class="tgrid" data-ttrack aria-label="All testimonials, scroll to see more" tabindex="-1">
+         <li>
+            <button type="button" class="tcard is-active" data-tcard aria-pressed="false" data-quote="This Seller Rocks!!! Please do work with her she listen to everything I wanted and made it happen if you are tired of looking around and cant figure out who to chose just chose her she will help you get what you need done. Thank you so much Humna Kashif you did Excellent. And my project will be a success." data-name="Moreen" data-role="CEO, United States of America" data-topic="Product Design">
+              <span class="tcard__topic">Product Design</span>
+              <span class="tcard__quote">&ldquo;This Seller Rocks!!! Please do work with her she listen to everything I wanted and made it happen if you are tired of looking around and cant figure out who to chose just chose her she will help you get what you need done. Thank you so much Humna ksahif you did Excellent. And my project will be a success&rdquo;</span>
+              <span class="tcard__who"><span class="tcard__avatar" aria-hidden="true"><img src="./assets/images/Paulave.jpg"/></span><span><strong>Moreen</strong><span>CEO, United States of America</span></span></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="tcard " data-tcard aria-pressed="true" data-quote="The seller had outstanding response time and was very helpful in dialing in my needs. I was able to respond with confidence that the seller would take my feedback and deliver. The final product is perfect for my needs and I highly recommend the work!" data-name="Synergypros" data-role="CEO, Synergy international | USA" data-topic="Product design">
+              <span class="tcard__topic">UI/UX and Graphic Design</span>
+              <span class="tcard__quote">&ldquo;
+							The seller had outstanding response time and was very helpful in dialing in my needs. I was able to respond with confidence that the seller would take my feedback and deliver. The final product is perfect for my needs and I highly recommend the work! &rdquo;</span>
+              <span class="tcard__who"><span class="tcard__avatar" aria-hidden="true"><img src="./assets/images/synergy.jpg"/></span><span><strong>Synergypros</strong><span>CEO, Synergy international | USA</span></span></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="tcard" data-tcard aria-pressed="false" data-quote="She is very good at her work. I got the responsive working website as I want before time. Great Work" data-name="Waqas Amin" data-role="Manager, Holiday Homes | Autralia" data-topic="UI/UX Design & Frontend Development">
+              <span class="tcard__topic">UI/UX Design & Frontend development</span>
+              <span class="tcard__quote">&ldquo;
+							She is very good at her work. I got the design and responsive website as I want before time. Great Work &rdquo;</span>
+              <span class="tcard__who"><span class="tcard__avatar" aria-hidden="true"><img src="./assets/images/waqas.jpg"/></span><span><strong>Waqas Amin</strong><span> Manager, Holiday Homes | Autralia </span></span></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="tcard" data-tcard aria-pressed="false" data-quote="Great service, great very responsive. Highly recommended👍" data-name="Greg" data-role="CEO, Greg.Woodard | USA" data-topic="AI product UX">
+              <span class="tcard__topic">AI product UX</span>
+              <span class="tcard__quote">&ldquo; Great service, great very responsive. Highly recommended👍&rdquo;</span>
+              <span class="tcard__who"><span class="tcard__avatar" aria-hidden="true"><img src="./assets/images/gwood.jpg"/> </span><span><strong>Greg</strong><span>CEO, Greg.Woodard | USA</span></span></span>
+            </button>
+          </li>
+          
+        </ul>
+      </div>
+    </section>
+    <section id="skills" class="snapshot section" aria-labelledby="skills-heading">
+      <div class="container">
+        <header class="sec-head">
+          <p class="eyebrow">Skills and tools</p>
+          <h2 id="skills-heading" class="display">
+            <span class="display__muted">What I work with,</span>
+            <span class="display__bold"><em>at a glance.</em></span>
+          </h2>
+        </header>
+        <div class="skills-compact reveal-on-scroll">
+          <dl class="skills-compact__rows">
+            <div class="skills-compact__row"><dt>Design</dt><dd><ul class="chips"><li>UX research</li><li>Wireframing and prototyping</li><li>Design systems</li><li>Accessibility (WCAG)</li><li>Figma</li><li>Adobe XD</li></ul></dd></div>
+            <div class="skills-compact__row"><dt>AI experience</dt><dd><ul class="chips"><li>AI agents</li><li>Agentic workflows</li><li>Conversational UX</li><li>Human–AI interaction</li></ul></dd></div>
+            <div class="skills-compact__row"><dt>Frontend and CMS</dt><dd><ul class="chips"><li>HTML, CSS, JavaScript</li><li>TypeScript</li><li>React</li><li>WordPress</li><li>Shopify</li><li>Webflow</li></ul></dd></div>
+            <div class="skills-compact__row"><dt>AI tools</dt><dd><ul class="chips"><li>ChatGPT</li><li>Claude</li><li>Gemini</li><li>Cursor</li><li>Midjourney</li><li>Lovable</li></ul></dd></div>
+          </dl>
+          <div class="skills-compact__foot">
+            <div class="snap-actions">
+              <a class="btn btn--primary" href="assets/Humna-Kashif-Resume.pdf" download data-resume-link hidden>Download resume</a>
+              <a class="btn btn--secondary" href="mailto:humnakashif9@gmail.com"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg> Email</a>
+              <a class="btn btn--secondary" href="https://linkedin.com/in/humna-kashif" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a>
+              <a class="btn btn--secondary" href="https://www.behance.net/humnakashif" target="_blank" rel="noopener"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h5.2a2.4 2.4 0 0 1 0 4.8H2.5V6.5zm0 4.8h5.9a2.85 2.85 0 0 1 0 5.7H2.5v-5.7"/><path d="M14 6.5h6.5"/><path d="M13.6 14h7.4a3.7 3.7 0 1 0-1.1 3.2"/></svg> Behance<span class="visually-hidden"> (opens in a new tab)</span></a>
+              <a class="btn btn--secondary" href="https://linkedin.com/in/humna-kashif" target="_blank" rel="noopener"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg> Github<span class="visually-hidden"> (opens in a new tab)</span></a>
+              <a class="btn btn--secondary" href="https://www.instagram.com/humnakashif" target="_blank" rel="noopener"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg> Instagram<span class="visually-hidden"> (opens in a new tab)</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="faq" class="faq section band" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="faq__layout">
+          <div class="faq__main">
+        <header class="sec-head">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-heading" class="display">
+            <span class="display__muted">Good questions.</span>
+            <span class="display__bold">Straight <em>answers.</em></span>
+          </h2>
+        </header>
+
+       <ul class="faq__list" data-faq-list>
+  <li class="faq__item">
+    <h3>
+      <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-panel-1" id="faq-trigger-1" data-faq-trigger>
+        <span class="faq__number">01</span>
+        <span class="faq__question-text">Can you design the product and build it too?</span>
+        <span class="faq__icon" aria-hidden="true">+</span>
+      </button>
+    </h3>
+    <div class="faq__panel" id="faq-panel-1" role="region" aria-labelledby="faq-trigger-1" hidden>
+      <p>Yes. I take a product from UX research and design systems to a working frontend in HTML, CSS, JavaScript, React and CMS platforms. I designed and built the Ministry of Justice website, and the Aibers healthcare system, so what gets designed is what gets built.</p>
+    </div>
+  </li>
+
+  <li class="faq__item">
+    <h3>
+      <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-panel-2" id="faq-trigger-2" data-faq-trigger>
+        <span class="faq__number">02</span>
+        <span class="faq__question-text">How do you approach AI in a product?</span>
+        <span class="faq__icon" aria-hidden="true">+</span>
+      </button>
+    </h3>
+    <div class="faq__panel" id="faq-panel-2" role="region" aria-labelledby="faq-trigger-2" hidden>
+      <p>AI should make complex work feel simpler, and the person should stay in control. I show what the system understood, keep suggestions editable, make sources visible, and ask for review before anything consequential happens. I applied this to the AI coach in Habitus and the AI search in Emax and the Adl platform.</p>
+    </div>
+  </li>
+
+  <li class="faq__item">
+    <h3>
+      <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-panel-3" id="faq-trigger-3" data-faq-trigger>
+        <span class="faq__number">03</span>
+        <span class="faq__question-text">What kinds of products have you worked on?</span>
+        <span class="faq__icon" aria-hidden="true">+</span>
+      </button>
+    </h3>
+    <div class="faq__panel" id="faq-panel-3" role="region" aria-labelledby="faq-trigger-3" hidden>
+      <p>Government and legal platforms (Ministry of Justice, Kuwait), healthcare systems (Aibers, Ministry of Health), franchise and e-commerce products (Edible Arrangements, Emax), fintech (Payoneer), social and entertainment apps, and AI-enabled products, plus websites for businesses and non-profits.</p>
+    </div>
+  </li>
+
+  <li class="faq__item">
+    <h3>
+      <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-panel-4" id="faq-trigger-4" data-faq-trigger>
+        <span class="faq__number">04</span>
+        <span class="faq__question-text">Can you design for Arabic and English?</span>
+        <span class="faq__icon" aria-hidden="true">+</span>
+      </button>
+    </h3>
+    <div class="faq__panel" id="faq-panel-4" role="region" aria-labelledby="faq-trigger-4" hidden>
+      <p>Yes. I have designed and built bilingual interfaces with right-to-left layouts, Arabic typography and language switching for the Ministry of Justice in Kuwait, including the Laws and Decision Portal and the Adl platform.</p>
+    </div>
+  </li>
+
+  <li class="faq__item">
+    <h3>
+      <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-panel-5" id="faq-trigger-5" data-faq-trigger>
+        <span class="faq__number">05</span>
+        <span class="faq__question-text">Can you work on an existing product or website?</span>
+        <span class="faq__icon" aria-hidden="true">+</span>
+      </button>
+    </h3>
+    <div class="faq__panel" id="faq-panel-5" role="region" aria-labelledby="faq-trigger-5" hidden>
+      <p>Yes. I can step into an existing experience, review its usability, accessibility and performance, then redesign or rebuild the parts that are not working, using your design system or creating one if there isn't any.</p>
+    </div>
+  </li>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="contact-slider section" aria-labelledby="contact-heading">
+      <div class="contact-slider__glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="contact-slider__content reveal-up">
+          <p class="contact-slider__eyebrow">Contact</p>
+          <h2 id="contact-heading" class="contact-slider__heading">Have a product or website to move forward?</h2>
+          <p class="contact-slider__description">Whether you need product design, a responsive website or help improving an existing digital experience, I’d be happy to discuss the brief.</p>
+          <div class="contact-slider__actions">
+            <a class="btn btn--primary contact-slider__cta" href="mailto:humnakashif9@gmail.com"><span>Email me</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
+            <a class="btn btn--secondary contact-slider__cta" href="https://linkedin.com/in/humna-kashif" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a>
+            <a class="btn btn--secondary contact-slider__cta" href="tel:+971557114804">+971 55 711 4804</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-slider__marquee marquee" data-marquee aria-hidden="true">
+        <div class="marquee__track" data-contact-marquee-track style="--marquee-duration: 34s;">
+          <div class="marquee__group"><span class="contact-slider__phrase">Product design</span><svg class="contact-slider__phrase-mark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" /></svg><span class="contact-slider__phrase">Frontend development</span><svg class="contact-slider__phrase-mark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" /></svg><span class="contact-slider__phrase">AI product UX</span><svg class="contact-slider__phrase-mark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" /></svg><span class="contact-slider__phrase">Design systems</span><svg class="contact-slider__phrase-mark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" /></svg><span class="contact-slider__phrase">Let’s connect</span><svg class="contact-slider__phrase-mark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" /></svg></div>
+          <div class="marquee__group"><span class="contact-slider__phrase">Product design</span><svg class="contact-slider__phrase-mark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" /></svg><span class="contact-slider__phrase">Frontend development</span><svg class="contact-slider__phrase-mark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" /></svg><span class="contact-slider__phrase">AI product UX</span><svg class="contact-slider__phrase-mark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" /></svg><span class="contact-slider__phrase">Design systems</span><svg class="contact-slider__phrase-mark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" /></svg><span class="contact-slider__phrase">Let’s connect</span><svg class="contact-slider__phrase-mark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z" /></svg></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__statement heading-duo">
+        <span class="heading-duo__muted"><span>Let’s</span> <span class="footer__cycling-word" data-footer-cycling-word data-words="design|build|improve">design</span></span>
+        <span class="heading-duo__bold">something great together.</span>
+      </p>
+      <div class="footer__columns" data-footer-columns>
+        <div class="footer__column"><h2 class="footer__column-heading">Email</h2><a href="mailto:humnakashif9@gmail.com">humnakashif9@gmail.com</a></div>
+        <div class="footer__column"><h2 class="footer__column-heading">Phone (UAE)</h2><a href="tel:+971557114804">+971 55 711 4804</a> <br> <br> <h2 class="footer__column-heading">Phone (PAK)</h2> <a href="tel:+923335717374">+92 333 571 7374</a> </div>
+        <div class="footer__column"><h2 class="footer__column-heading">Social</h2>
+          <ul class="footer__social" data-footer-social>
+            <li><a class="footer__social-link" href="https://linkedin.com/in/humna-kashif" target="_blank" rel="noopener" aria-label="LinkedIn"><span aria-hidden="true" style="font-weight:700;font-size:12px;letter-spacing:-.02em"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span></a></li>
+            <li><a class="footer__social-link" href="https://www.instagram.com/humnakashif" target="_blank" rel="noopener" aria-label="Instagram"><span aria-hidden="true" style="font-weight:700;font-size:12px;letter-spacing:-.02em"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></span></a></li>
+           <li><a class="footer__social-link" href="https://www.behance.net/humnakashif" target="_blank" rel="noopener" aria-label="Behance"><span aria-hidden="true" style="font-weight:700;font-size:12px;letter-spacing:-.02em"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h5.2a2.4 2.4 0 0 1 0 4.8H2.5V6.5zm0 4.8h5.9a2.85 2.85 0 0 1 0 5.7H2.5v-5.7"/><path d="M14 6.5h6.5"/><path d="M13.6 14h7.4a3.7 3.7 0 1 0-1.1 3.2"/></svg></span></a></li>
+           <li><a class="footer__social-link" href="https://github.com/Humnaaah" target="_blank" rel="noopener" aria-label="Github"><span aria-hidden="true" style="font-weight:700;font-size:12px;letter-spacing:-.02em"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span></a></li>
+           <li><a class="footer__social-link" href="https://wa.me/971557114804" target="_blank" rel="noopener" aria-label="Whatsapp"><span aria-hidden="true" style="font-weight:700;font-size:12px;letter-spacing:-.02em"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.9A9 9 0 1 1 8 19.4L3 21z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.2-1.8-1-.8.7c-.9-.4-1.9-1.4-2.3-2.3l.7-.8-1-1.8L9 9.5z"/></svg></span></a></li>
+          </ul>
+        </div>
+        <div class="footer__column"><h2 class="footer__column-heading">Menu</h2><ul><li><a href="#projects">Work</a></li><li><a href="#ai-experience">AI UX</a></li></ul></div>
+        <div class="footer__column"><h2 class="footer__column-heading"><br/></h2><ul><li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li></ul></div> 
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2026 Humna Kashif</p>
+        <!-- <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">Pause animations</button> -->
+      </div>
+    </div>
+    <!-- <p class="footer__wordmark" aria-hidden="true">HUMNA</p> -->
+  </footer>
+
+  <!-- ============ AI COPILOT ============ -->
+  <div class="copilot" data-copilot>
+    <button
+      class="copilot-launcher"
+      type="button"
+      data-copilot-launcher
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      aria-controls="copilot-panel"
+    >
+      <span class="copilot-launcher__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 64 64" role="img" aria-label="AI assistant"><defs><clipPath id="oc"><circle cx="32" cy="32" r="30"/></clipPath><linearGradient id="ob" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4338ca"/><stop offset="1" stop-color="#0e7490"/></linearGradient><filter id="obl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter></defs><g clip-path="url(#oc)"><circle cx="32" cy="32" r="30" fill="url(#ob)"/><g filter="url(#obl)"><circle cx="20" cy="22" r="18" fill="#6366f1" opacity=".9"><animateTransform attributeName="transform" type="translate" values="0 0;24 14;8 26;0 0" dur="3.2s" repeatCount="indefinite"/></circle><circle cx="48" cy="20" r="16" fill="#22d3ee" opacity=".8"><animateTransform attributeName="transform" type="translate" values="0 0;-26 18;-10 8;0 0" dur="3.8s" repeatCount="indefinite"/></circle><circle cx="32" cy="52" r="16" fill="#0e7490"><animateTransform attributeName="transform" type="translate" values="0 0;16 -26;-18 -14;0 0" dur="3.5s" repeatCount="indefinite"/></circle></g></g><circle cx="32" cy="32" r="30" fill="none" stroke="#fff" stroke-opacity=".3"/><path d="M32 16l3.8 12.2L48 32l-12.2 3.8L32 48l-3.8-12.2L16 32l12.2-3.8z" fill="#fff"/></svg>
+        <!-- <span class="ai-orb"><i></i><i></i><i></i></span> -->
+      </span>
+      <span data-copilot-launcher-label>Ask AI</span>
+    </button>
+
+    <div
+      class="copilot-panel"
+      id="copilot-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="copilot-panel-title"
+      data-copilot-panel
+      hidden
+    >
+      <header class="copilot-panel__header">
+        <!-- <span class="ai-orb ai-orb--lg" aria-hidden="true"><i></i><i></i><i></i></span> -->
+         <span class="copilot-launcher__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 64 64" role="img" aria-label="AI assistant"><defs><clipPath id="oc"><circle cx="32" cy="32" r="30"></circle></clipPath><linearGradient id="ob" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4338ca"></stop><stop offset="1" stop-color="#0e7490"></stop></linearGradient><filter id="obl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"></feGaussianBlur></filter></defs><g clip-path="url(#oc)"><circle cx="32" cy="32" r="30" fill="url(#ob)"></circle><g filter="url(#obl)"><circle cx="20" cy="22" r="18" fill="#6366f1" opacity=".9"><animateTransform attributeName="transform" type="translate" values="0 0;24 14;8 26;0 0" dur="3.2s" repeatCount="indefinite"></animateTransform></circle><circle cx="48" cy="20" r="16" fill="#22d3ee" opacity=".8"><animateTransform attributeName="transform" type="translate" values="0 0;-26 18;-10 8;0 0" dur="3.8s" repeatCount="indefinite"></animateTransform></circle><circle cx="32" cy="52" r="16" fill="#0e7490"><animateTransform attributeName="transform" type="translate" values="0 0;16 -26;-18 -14;0 0" dur="3.5s" repeatCount="indefinite"></animateTransform></circle></g></g><circle cx="32" cy="32" r="30" fill="none" stroke="#fff" stroke-opacity=".3"></circle><path d="M32 16l3.8 12.2L48 32l-12.2 3.8L32 48l-3.8-12.2L16 32l12.2-3.8z" fill="#fff"></path></svg>
+         <!-- <span class="ai-orb"><i></i><i></i><i></i></span> -->
+        </span>
+        <div class="copilot-panel__heading">
+          <p class="copilot-panel__title" id="copilot-panel-title" data-copilot-title>AI Copilot</p>
+          <p class="copilot-panel__status" data-copilot-status>Ask about the work</p>
+        </div>
+        <button class="copilot-panel__close" type="button" data-copilot-close aria-label="Close AI Copilot">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+          </svg>
+        </button>
+      </header>
+
+      <div class="copilot-panel__body" data-copilot-body aria-live="polite">
+        <!-- Rendered from data/content.js by js/copilot.js -->
+      </div>
+
+      <form class="copilot-panel__input-row" data-copilot-form>
+        <textarea
+          class="copilot-panel__input"
+          data-copilot-input
+          rows="1"
+          placeholder="Ask me anything about the work..."
+          aria-label="Ask the AI Copilot a question"
+        ></textarea>
+        <button class="copilot-panel__send" type="submit" data-copilot-send aria-label="Send message">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="data/content.js"></script>
+  <script src="js/a11y-utils.js" defer></script>
+  <script src="js/theme.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/ai-experience.js" defer></script>
+  <script src="js/contact-slider.js" defer></script>
+  <script src="js/faq.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/copilot.js" defer></script>
+  <script src="js/hero-chat.js" defer></script>
+  <script src="js/motion.js" defer></script>
+  <script src="js/snapshot.js" defer></script>
+  <script src="js/case-study-modal.js" defer></script>
+  <script src="js/testimonials.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+/* ==========================================================================
+   FOOTER.CSS
+   Large two-tone closing statement (muted "Lets design" / bold white
+   "incredible work together.") with a cycling word, multi-column nav/
+   social/legal grid, a copyright line, and a giant bleeding wordmark
+   that fades to transparent at the bottom — clipped by the footer's
+   own overflow so it reads as a background flourish, not literal text.
+   Dark "inverted" surface — a deliberate bookend contrast against the
+   light page, same pattern as the pricing cards.
+   ========================================================================== */
+
+.footer {
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--space-9);
+  padding-bottom: 0;
+  background-color: var(--surface-inverted);
+  color: var(--surface-inverted-foreground);
+}
+
+.footer__statement {
+  font-size: clamp(2rem, 4vw + 1rem, 4rem);
+  max-width: 16ch;
+  margin-bottom: var(--space-9);
+}
+
+.footer__statement .heading-duo__muted {
+  display: block;
+  color: var(--surface-inverted-muted);
+  font-weight: var(--fw-regular);
+}
+
+.footer__statement .heading-duo__bold {
+  display: block;
+  color: var(--surface-inverted-foreground);
+  font-weight: var(--fw-bold);
+}
+
+.footer__cycling-word {
+  display: inline-block;
+  font-style: italic;
+  transition: opacity var(--transition-base) var(--ease-standard),
+    transform var(--transition-base) var(--ease-standard);
+}
+
+.footer__cycling-word.is-swapping {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.footer__columns {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1.6fr 1fr 1fr;
+  gap: var(--space-6);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer__column-heading {
+  font-size: var(--fs-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  color: var(--surface-inverted-muted);
+  margin-bottom: var(--space-4);
+}
+
+.footer__column a,
+.footer__column ul li {
+  font-size: var(--fs-small);
+  color: var(--surface-inverted-foreground);
+}
+
+.footer__column ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__column a {
+  transition: color var(--transition-fast) var(--ease-standard);
+}
+
+.footer__column a:hover {
+  color: var(--surface-inverted-muted);
+}
+
+/* ---- Social icon buttons ---- */
+
+.footer__social {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--surface-inverted-foreground);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-semibold);
+  transition: background-color var(--transition-fast) var(--ease-standard),
+    transform var(--transition-fast) var(--ease-standard);
+}
+
+.footer__social-link--count {
+  width: auto;
+  padding-inline: var(--space-3);
+}
+
+.footer__social-link:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+/* ---- Bottom bar ---- */
+
+.footer__bottom {
+  padding-block: var(--space-6);
+}
+
+.footer__copyright {
+  font-size: var(--fs-small);
+  color: var(--surface-inverted-muted);
+}
+
+/* ---- Giant bleeding wordmark ----
+   Sized well past the footer's own visible height and pulled up with
+   a negative margin so only its top portion shows before the mask
+   fades it to transparent — reads as a background flourish bleeding
+   off the bottom edge, not as literal readable text. */
+
+.footer__wordmark {
+  display: block;
+  width: 100%;
+  margin-top: var(--space-8);
+  padding-inline: var(--container-padding-desktop);
+  font-size: clamp(6rem, 17vw, 13rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.03em;
+  line-height: 0.78;
+  color: var(--surface-inverted-foreground);
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 92%);
+  mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 92%);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .footer__columns {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-7);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer__columns {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer__wordmark {
+    padding-inline: var(--container-padding-tablet);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer__columns {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__wordmark {
+    padding-inline: var(--container-padding-mobile);
+    font-size: clamp(4rem, 22vw, 7rem);
+  }
+}

@@ -1,0 +1,151 @@
+/* ==========================================================================
+   CONTACT-SLIDER.CSS
+   The homepage's closing CTA — replaces what was a small "Speak to me"
+   pill with a full-width, higher-energy section: a big two-line
+   statement + CTA sitting over a soft radial glow, with a continuously
+   scrolling marquee of short prompts running beneath it. Reuses the
+   site's existing .marquee mechanism (animations.css) for the motion
+   and .btn--primary for the CTA, so it stays visually consistent with
+   the rest of the page rather than introducing a new component style.
+   ========================================================================== */
+
+.contact-slider {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--space-9) var(--space-8);
+  text-align: center;
+}
+
+.contact-slider__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(900px, 140vw);
+  height: min(900px, 140vw);
+  transform: translate(-50%, -50%);
+  background: var(--gradient-glow);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-slider__content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.contact-slider__eyebrow {
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-medium);
+  color: var(--muted);
+  margin-bottom: var(--space-2);
+}
+
+.contact-slider__heading {
+  font-size: clamp(2rem, 3.4vw + 1.2rem, 3.25rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.1;
+  letter-spacing: var(--ls-tight);
+  color: var(--foreground);
+  margin-bottom: var(--space-5);
+}
+
+.contact-slider__description {
+  font-size: var(--fs-body-lg);
+  color: var(--muted);
+  max-width: 46ch;
+  margin-inline: auto;
+  margin-bottom: var(--space-7);
+}
+
+.contact-slider__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.contact-slider__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-inline: var(--space-7);
+}
+
+.contact-slider__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  color: var(--foreground);
+  transition: transform var(--transition-fast) var(--ease-standard),
+    border-color var(--transition-fast) var(--ease-standard),
+    box-shadow var(--transition-fast) var(--ease-standard);
+}
+
+.contact-slider__icon:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 20px -8px rgba(79, 70, 229, 0.4);
+}
+
+/* ---- Marquee ----
+   Large, deliberately lower-contrast type running underneath the CTA
+   — reads as ambient texture rather than competing with the headline.
+   Motion, seamless-loop duplication, and the hover-to-pause behavior
+   all come from the shared .marquee system in animations.css/js. */
+
+.contact-slider__marquee {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--space-8);
+}
+
+.contact-slider__marquee .marquee__group {
+  gap: var(--space-8);
+  padding-right: var(--space-8);
+}
+
+.contact-slider__phrase {
+  font-size: clamp(1.5rem, 2.4vw + 1rem, 2.75rem);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-tight);
+  color: var(--muted);
+  white-space: nowrap;
+  transition: color var(--transition-base) var(--ease-standard);
+}
+
+.contact-slider__marquee:hover .contact-slider__phrase {
+  color: var(--foreground);
+}
+
+.contact-slider__phrase-mark {
+  display: inline-block;
+  margin-inline: var(--space-8);
+  color: var(--accent);
+  font-size: 0.5em;
+  vertical-align: middle;
+  transform: translateY(-0.15em);
+}
+
+@media (max-width: 768px) {
+  .contact-slider {
+    padding-block: var(--space-8) var(--space-7);
+  }
+
+  .contact-slider__actions {
+    flex-direction: column;
+  }
+
+  .contact-slider__cta {
+    width: 100%;
+    justify-content: center;
+  }
+}

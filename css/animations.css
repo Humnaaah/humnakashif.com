@@ -1,0 +1,136 @@
+/* ==========================================================================
+   ANIMATIONS.CSS
+   Shared, cross-section animation utilities and keyframes. Section-
+   specific entrance/hover animations that only ever apply to one
+   component (hero reveal, nav drawer stagger, FAQ accordion, pricing/
+   services/experience reveals) stay in their own stylesheets — this
+   file holds the *reusable* primitives referenced from multiple places:
+   directional scroll-reveal classes and the marquee/ticker system.
+   ========================================================================== */
+
+/* ==========================================================================
+   SCROLL REVEAL UTILITIES
+   Applied by js/animations.js via IntersectionObserver. Each element
+   starts in its offset/transparent state and transitions to resting
+   once `.is-visible` is added.
+   ========================================================================== */
+
+.reveal-on-scroll,
+.reveal-up,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
+  transition: opacity var(--transition-slow) var(--ease-out),
+    transform var(--transition-slow) var(--ease-out);
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+}
+
+.reveal-on-scroll.is-visible,
+.reveal-up.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll,
+  .reveal-up,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   MARQUEE / TICKER SYSTEM
+   Used by: the hero divider ticker, the trusted-clients divider ticker,
+   and the trusted-clients logo row. Each instance duplicates its
+   content into two identical `.marquee__group`s inside a `.marquee__track`
+   — animating the track to translateX(-50%) and looping back to 0%
+   lines the second group up exactly where the first started, so the
+   loop point is invisible. Rendering/duplication happens in
+   js/animations.js; this file only defines the motion.
+   ========================================================================== */
+
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 48px,
+    black calc(100% - 48px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 48px,
+    black calc(100% - 48px),
+    transparent 100%
+  );
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-scroll var(--marquee-duration, 20s) linear infinite;
+}
+
+.marquee__group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause on hover (mouse only — touch has no hover, so mobile keeps
+   scrolling, which is the more usable default for touch devices). */
+@media (hover: hover) {
+  .marquee:hover .marquee__track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+  }
+}

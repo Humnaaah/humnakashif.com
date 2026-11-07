@@ -1,0 +1,116 @@
+/* ==========================================================================
+   RESPONSIVE.CSS
+   Breakpoint-driven structural adjustments only (spacing, container
+   padding, grid → stack). Component-level responsive rules (project
+   cards, pricing cards, etc.) live in their own CSS files and are
+   layered on top of this in later phases.
+
+   ASSUMPTION FLAG: breakpoints below (1024px / 768px / 480px) are
+   standard Framer-generated breakpoints but the reference project's
+   actual custom breakpoints have not been confirmed. Adjust these
+   media query values once checked against the editable Framer file
+   (Phase 0 inventory, item 8.2).
+   ========================================================================== */
+
+/* ---- Desktop-only nav toggle default state ----
+   Must come BEFORE the mobile media query below: with equal
+   specificity, an unconditional rule placed after a media query wins
+   the cascade even when that media query matches, which was silently
+   hiding the mobile menu button at every breakpoint. */
+[data-nav-toggle] {
+  display: none;
+}
+
+/* ---- Tablet: <= 1024px ---- */
+@media (max-width: 1024px) {
+  .container {
+    padding-inline: var(--container-padding-tablet);
+  }
+
+  .nav {
+    padding-inline: var(--container-padding-tablet);
+  }
+
+  .section {
+    padding-block: var(--section-spacing-tablet);
+  }
+
+  [data-grid="projects"],
+  [data-grid="pricing"],
+  [data-grid="blog"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  [data-grid="experience-layout"] {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Mobile: <= 768px ---- */
+@media (max-width: 768px) {
+  .trusted-clients__inner {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .trusted-clients__logos-row {
+    width: 100%;
+  }
+  .container {
+    padding-inline: var(--container-padding-mobile);
+  }
+
+  .section {
+    padding-block: var(--section-spacing-mobile);
+  }
+
+  .section-heading {
+    max-width: 100%;
+  }
+
+  [data-nav-links] {
+    display: none;
+  }
+
+  .nav__contact {
+    display: none;
+  }
+
+  [data-nav-toggle] {
+    display: inline-flex;
+  }
+
+  [data-grid="projects"],
+  [data-grid="pricing"],
+  [data-grid="blog"] {
+    grid-template-columns: 1fr;
+  }
+
+  [data-hero-proof] {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  [data-footer-columns] {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+}
+
+/* ---- Small mobile: <= 480px ---- */
+@media (max-width: 480px) {
+  :root {
+    --fs-hero: clamp(2.25rem, 10vw, 3rem);
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  [data-hero-cta-group] {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

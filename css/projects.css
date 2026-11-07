@@ -1,0 +1,222 @@
+/* ==========================================================================
+   PROJECTS.CSS
+   "Latest Projects" section + reusable .project-card component.
+   Large visual cards: image with hover overlay CTA, meta row below
+   with client/category and a hover-animated arrow.
+   ========================================================================== */
+
+.projects .section-heading {
+  margin-bottom: var(--space-7);
+}
+
+/* ---- Grid ----
+   Reference presents large cards, not a dense multi-column grid —
+   2-up on desktop, collapsing to 1-up well before mobile (handled
+   here rather than the generic responsive.css collapse, since these
+   cards need to stay large at intermediate widths too). */
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+.projects__view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-7);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  color: var(--foreground);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-1);
+  transition: border-color var(--transition-fast) var(--ease-standard),
+    gap var(--transition-fast) var(--ease-standard);
+}
+
+.projects__view-all:hover {
+  border-color: var(--accent);
+  gap: var(--space-3);
+}
+
+/* ==========================================================================
+   PROJECT CARD COMPONENT
+   ========================================================================== */
+
+.project-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  overflow: hidden;
+  transition: transform var(--transition-base) var(--ease-out),
+    border-color var(--transition-base) var(--ease-standard),
+    box-shadow var(--transition-base) var(--ease-out);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+}
+
+.project-card__link {
+  display: block;
+}
+
+/* ---- Media / image area ---- */
+
+.project-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--background-elevated);
+}
+
+.project-card__media img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.7s var(--ease-out);
+    object-position: left;
+}
+
+.project-card:hover .project-card__media img {
+  transform: scale(1.08);
+}
+
+/* Bottom scrim so the overlay CTA stays legible over any image */
+.project-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0) 40%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-base) var(--ease-standard);
+}
+
+.project-card:hover .project-card__media::after {
+  opacity: 1;
+}
+
+.project-card__overlay-cta {
+  position: absolute;
+  left: var(--space-5);
+  bottom: var(--space-5);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--transition-base) var(--ease-out),
+    transform var(--transition-base) var(--ease-out);
+}
+
+.project-card:hover .project-card__overlay-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card__overlay-cta .project-card__arrow {
+  transition: transform var(--transition-fast) var(--ease-standard);
+}
+
+.project-card:hover .project-card__overlay-cta .project-card__arrow {
+  transform: translate(2px, -2px);
+}
+
+/* ---- Meta row (below image) ---- */
+
+.project-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6);
+}
+
+.project-card__client {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  color: var(--foreground);
+}
+
+.project-card__category {
+  margin-top: var(--space-1);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.project-card__meta-arrow {
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast) var(--ease-standard),
+    color var(--transition-fast) var(--ease-standard);
+}
+
+.project-card:hover .project-card__meta-arrow {
+  color: var(--accent);
+  transform: translate(3px, -3px);
+}
+
+/* ==========================================================================
+   TOUCH DEVICES
+   No hover state exists, so the CTA and image treatment that would
+   otherwise depend on :hover are shown by default instead.
+   ========================================================================== */
+
+@media (hover: none) {
+  .project-card__overlay-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .project-card__media::after {
+    opacity: 1;
+  }
+
+  .project-card__meta-arrow {
+    color: var(--accent);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE — deliberate mobile composition, not a scaled-down grid
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .projects__grid {
+    gap: var(--space-5);
+  }
+}
+
+@media (max-width: 768px) {
+  .projects__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .project-card__media {
+    aspect-ratio: 16 / 11;
+  }
+
+  .project-card__meta {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .project-card__client {
+    font-size: var(--fs-body-lg);
+  }
+}

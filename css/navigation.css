@@ -1,0 +1,402 @@
+/* ==========================================================================
+   NAVIGATION.CSS
+   Floating pill nav, inset from the viewport edges rather than
+   full-bleed. Two visual states, both driven by navigation.js:
+     - Top of page: full-width pill — avatar, links, Contact, theme
+       toggle all visible.
+     - Scrolled: the pill shrinks down to just the avatar + name and a
+       "•••" button, which opens a small dropdown containing the same
+       links/Contact/theme-toggle (nothing is removed, just condensed
+       behind one extra tap/click — see .nav__more below).
+   ========================================================================== */
+
+.nav {
+  position: sticky;
+  top: var(--space-4);
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  padding-inline: var(--container-padding-desktop);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  height: 72px;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--space-3) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background-color: rgba(250, 250, 249, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-card);
+  transition: height var(--transition-base) var(--ease-standard),
+    max-width var(--transition-base) var(--ease-standard),
+    padding var(--transition-base) var(--ease-standard),
+    background-color var(--transition-base) var(--ease-standard),
+    box-shadow var(--transition-base) var(--ease-standard);
+}
+
+[data-theme="dark"] .nav__inner {
+  background-color: rgba(26, 26, 30, 0.7);
+}
+
+/* Applied by navigation.js once the user scrolls past a small threshold:
+   the pill gains a slightly stronger shadow since it's now "floating"
+   over page content rather than sitting at the very top. On desktop
+   it also visually contracts down to just the avatar + "•••" (below);
+   on mobile the pill stays full-width since there's nothing further
+   to condense (links/Contact are already hidden behind the hamburger
+   at that breakpoint, per responsive.css). */
+.nav.is-scrolled .nav__inner {
+  box-shadow: var(--shadow-hover);
+}
+
+@media (min-width: 769px) {
+  .nav.is-scrolled .nav__inner {
+    max-width: 340px;
+  }
+
+  .nav.is-scrolled .nav__links,
+  .nav.is-scrolled .nav__contact {
+    display: none;
+  }
+  /* theme toggle stays reachable in the collapsed pill */
+  .nav.is-scrolled .theme-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .nav.is-scrolled .nav__more {
+    display: inline-flex;
+  }
+}
+
+/* ---- Logo ---- */
+
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
+  flex-shrink: 0;
+}
+
+.nav__logo-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.nav__logo-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Links ---- */
+
+.nav__links {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav__links ul {
+  display: flex;
+  align-items: center;
+  gap: var(--space-7);
+}
+
+.nav__links a {
+  position: relative;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--muted);
+  padding-block: var(--space-1);
+  transition: color var(--transition-fast) var(--ease-standard);
+}
+
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 1px;
+  background-color: var(--foreground);
+  transition: width var(--transition-fast) var(--ease-standard);
+}
+
+.nav__links a:hover {
+  color: var(--foreground);
+}
+
+.nav__links a:hover::after {
+  width: 100%;
+}
+
+/* Current page indicator */
+.nav__links a[aria-current="page"] {
+  color: var(--foreground);
+}
+
+.nav__links a[aria-current="page"]::after {
+  width: 100%;
+  background-color: var(--accent);
+}
+
+/* ---- Contact pill ---- */
+
+.nav__contact {
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--fs-small);
+}
+
+.nav__contact:hover {
+  background-color: var(--card-hover);
+}
+
+/* ---- Theme toggle ----
+   Sits between the Contact pill and the mobile hamburger, visible at
+   every breakpoint (not subject to the nav__links/nav__contact
+   mobile-hide rules in responsive.css). Sun and moon icons are both
+   always in the DOM and cross-fade/rotate based on [data-theme] on
+   <html>, rather than swapping DOM nodes, so the transition is smooth
+   and there's no layout shift. */
+
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  color: var(--foreground);
+  transition: background-color var(--transition-fast) var(--ease-standard),
+    border-color var(--transition-fast) var(--ease-standard);
+}
+
+.theme-toggle:hover {
+  background-color: var(--card-hover);
+}
+
+.theme-toggle__icon {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  transition: opacity var(--transition-base) var(--ease-standard),
+    transform var(--transition-base) var(--ease-standard);
+}
+
+/* Light mode (default): sun visible, moon hidden/rotated away */
+.theme-toggle__icon--sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.theme-toggle__icon--moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+/* Dark mode: moon visible, sun hidden/rotated away */
+[data-theme="dark"] .theme-toggle__icon--sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+[data-theme="dark"] .theme-toggle__icon--moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* ---- "•••" more menu (scrolled state only, desktop) ----
+   Sits where the links/contact/theme-toggle were; clicking it opens
+   a small floating dropdown with all of that content, so nothing is
+   ever actually unreachable — it's condensed, not removed. */
+
+.nav__more {
+  display: none;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.nav__more-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--muted);
+  transition: background-color var(--transition-fast) var(--ease-standard),
+    color var(--transition-fast) var(--ease-standard);
+}
+
+.nav__more-trigger:hover,
+.nav__more-trigger[aria-expanded="true"] {
+  background-color: var(--card-hover);
+  color: var(--foreground);
+}
+
+.nav__more-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.nav__more-menu {
+  position: absolute;
+  top: calc(100% + var(--space-3));
+  right: 0;
+  min-width: 220px;
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  box-shadow: var(--shadow-hover);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top right;
+  transition: opacity var(--transition-fast) var(--ease-out),
+    transform var(--transition-fast) var(--ease-out),
+    visibility var(--transition-fast) var(--ease-out);
+}
+
+.nav__more-trigger[aria-expanded="true"] + .nav__more-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.nav__more-menu ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav__more-menu a {
+  display: block;
+  padding: var(--space-3) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--foreground);
+  text-align: left;
+  transition: background-color var(--transition-fast) var(--ease-standard);
+}
+
+.nav__more-menu a:hover {
+  background-color: var(--card-hover);
+}
+
+.nav__more-menu-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+}
+
+.nav__more-menu-footer .nav__contact {
+  flex: 1;
+  text-align: center;
+}
+
+/* ---- Mobile toggle (hamburger) ---- */
+
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.nav__toggle-bar {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background-color: var(--foreground);
+  border-radius: 2px;
+  transition: transform var(--transition-fast) var(--ease-standard),
+    opacity var(--transition-fast) var(--ease-standard);
+}
+
+/* Hamburger → X morph, driven by aria-expanded (set in navigation.js) */
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar:first-child {
+  transform: translateY(3.75px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar:last-child {
+  transform: translateY(-3.75px) rotate(-45deg);
+}
+
+/* ---- Mobile drawer ---- */
+
+.nav__mobile {
+  overflow: hidden;
+  max-height: 0;
+  background-color: var(--background-elevated);
+  border-bottom: 1px solid transparent;
+  transition: max-height var(--transition-base) var(--ease-standard),
+    border-color var(--transition-base) var(--ease-standard);
+}
+
+.nav__mobile:not([hidden]) {
+  max-height: 400px;
+  border-bottom-color: var(--border);
+}
+
+.nav__mobile ul {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-5) var(--container-padding-mobile) var(--space-7);
+  gap: var(--space-1);
+}
+
+.nav__mobile a {
+  display: block;
+  padding-block: var(--space-3);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  color: var(--foreground);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--transition-base) var(--ease-out),
+    transform var(--transition-base) var(--ease-out);
+}
+
+/* Staggered reveal — only plays once the drawer's `open` class is applied
+   by navigation.js (keeps this out of `[hidden]` initial state so it
+   doesn't fire before the drawer is actually visible). */
+.nav__mobile.is-open a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav__mobile.is-open li:nth-child(1) a { transition-delay: 0.05s; }
+.nav__mobile.is-open li:nth-child(2) a { transition-delay: 0.1s; }
+.nav__mobile.is-open li:nth-child(3) a { transition-delay: 0.15s; }
+.nav__mobile.is-open li:nth-child(4) a { transition-delay: 0.2s; }
+.nav__mobile.is-open li:nth-child(5) a { transition-delay: 0.25s; }

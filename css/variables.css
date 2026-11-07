@@ -1,0 +1,199 @@
+/* ==========================================================================
+   VARIABLES.CSS
+   Design tokens for the portfolio theme.
+
+   ASSUMPTION FLAG: exact color values, font family, and spacing scale
+   could not be extracted from the live reference (Framer serves its
+   computed CSS through generated hashed classnames that aren't exposed
+   to a markup fetch). The values below are a reasonable placeholder
+   dark-theme system matching the *visual style* of the reference
+   (dark background, high-contrast text, single accent color, large
+   rounded cards). Replace with real values once confirmed against the
+   editable Framer project (see Phase 0 inventory, item 8.9).
+   ========================================================================== */
+
+:root {
+  /* ---- Color: base ----
+     :root is the LIGHT mode baseline (confirmed against the actual
+     reference screenshot). [data-theme="dark"] below overrides these
+     for dark mode — see that block for the dark values. */
+  --background: #fafaf9;
+  --background-elevated: #f2f1ef;
+  --foreground: #16161a;
+  --muted: #5c5c63;
+  /* Re-tuned from #8a8a8e (3.29:1 on --background — fails WCAG AA
+     text contrast) to a value that clears 4.5:1 with a small safety
+     margin, since this token is used for real text (micro labels,
+     meta captions, dates) and not just decorative tinting. */
+  --muted-foreground: #66666d;
+  --accent: #4f46e5;
+  --accent-foreground: #ffffff;
+  --border: #e4e3e0;
+  /* A stronger border for cases where the border IS the primary cue
+     that something is a UI control (inputs, accordion rows, secondary
+     buttons) — WCAG 1.4.11 Non-text Contrast requires 3:1 for these.
+     Decorative dividers keep using the softer --border above. */
+  --border-strong: #909094;
+  --card: #ffffff;
+  --card-hover: #f5f4f2;
+
+  /* Pricing and Experience-stack cards are a deliberate dark/light
+     inversion against the page (confirmed in the reference
+     screenshot: black pricing cards, white work-history cards) —
+     dedicated tokens so they don't have to fight the page tokens.
+     These flip again under [data-theme="dark"] so the *contrast
+     relationship* against the page is preserved in both modes. */
+  --surface-inverted: #16161a;
+  --surface-inverted-foreground: #ffffff;
+  --surface-inverted-muted: #a3a3a8;
+  --surface-inverted-elevated: #232327;
+
+  /* ---- New theme-system tokens ----
+     A single indigo→sky brand gradient carries through both themes
+     (buttons, badges, icon fills, glows, the footer wordmark) so
+     color feels intentional rather than a flat black-on-white site
+     with one gradient bolted on for dark mode only. */
+  --accent-secondary: #0369a1;
+  --button-background: var(--accent);
+  --button-text: var(--accent-foreground);
+  --shadow: var(--shadow-card);
+  --gradient-primary: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  --gradient-secondary: linear-gradient(135deg, var(--card), var(--card-hover));
+  --gradient-glow: radial-gradient(circle, rgba(79, 70, 229, 0.16), transparent 70%);
+  --gradient-text: linear-gradient(135deg, #4338ca, #0369a1 60%, #0e7490);
+  --surface-band: #f1f0ed;
+
+  /* ---- Color: semantic ---- */
+  --success: #22c55e;
+  --overlay: rgba(0, 0, 0, 0.5);
+
+  /* ---- Typography ---- */
+  /* PLACEHOLDER font stack — confirm exact family/weights in Framer's
+     Typography styles panel. Inter is used as a close, freely-licensed
+     stand-in for the geometric sans typical of this template style. */
+  --font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-serif: "Lora", "Iowan Old Style", Georgia, serif;
+
+  --fs-hero: clamp(2.5rem, 3.2vw + 1rem, 4.25rem);
+  --fs-h1: clamp(2.1rem, 3.4vw + 1rem, 3.6rem);
+  --fs-h2: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+  --fs-h3: 1.375rem;
+  --fs-body-lg: 1.125rem;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-micro: 0.75rem;
+
+  --lh-tight: 1.05;
+  --lh-heading: 1.15;
+  --lh-body: 1.6;
+
+  --ls-tight: -0.02em;
+  --ls-normal: 0;
+  --ls-wide: 0.08em;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ---- Layout ---- */
+  --container-width: 1200px;
+  --container-padding-desktop: 32px;
+  --container-padding-tablet: 24px;
+  --container-padding-mobile: 20px;
+
+  --section-spacing-desktop: 140px;
+  --section-spacing-tablet: 96px;
+  --section-spacing-mobile: 72px;
+
+  /* ---- Spacing scale ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* ---- Radius ---- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  /* ---- Motion ---- */
+  --transition-fast: 0.2s;
+  --transition-base: 0.35s;
+  --transition-slow: 0.6s;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---- Elevation ---- */
+  --shadow-card: 0 4px 16px rgba(20, 20, 20, 0.06);
+  --shadow-hover: 0 12px 32px rgba(20, 20, 20, 0.1);
+
+  /* ---- Z-index scale ---- */
+  --z-nav: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-chatbot: 400;
+}
+
+/* ==========================================================================
+   DARK MODE
+   A premium dark variation, not a simple color inversion: deep
+   elevated surfaces, a soft indigo→cyan accent gradient (unused in
+   light mode, which stays flat/neutral), stronger shadows, and the
+   inverted-surface tokens (pricing cards, footer, experience stack)
+   flipped so their contrast relationship against the page is
+   preserved in both themes.
+   ========================================================================== */
+
+[data-theme="dark"] {
+  --background: #121214;
+  --background-elevated: #1a1a1e;
+  --foreground: #f2f2f0;
+  --muted: #a3a3a8;
+  /* Re-tuned from #75757a (4.08:1 on --background — fails WCAG AA
+     text contrast) — see the light-mode note above. */
+  --muted-foreground: #8d8d93;
+  --accent: #818cf8;
+  --accent-foreground: #0b0b0d;
+  --border: #2a2a2e;
+  --border-strong: #686870;
+  --card: #1a1a1e;
+  --card-hover: #232327;
+
+  /* Inverted-surface components (pricing cards, footer, experience
+     stack) flip to light-on-dark's opposite — light surfaces — so
+     they still read as a deliberate contrast against the (now dark)
+     page, exactly as they contrast against the light page today. */
+  --surface-inverted: #f2f2f0;
+  --surface-inverted-foreground: #121214;
+  --surface-inverted-muted: #5a5a5e;
+  --surface-inverted-elevated: #e4e4e2;
+
+  --accent-secondary: #22d3ee;
+  --button-background: var(--accent);
+  --button-text: var(--accent-foreground);
+
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.45);
+  --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.55);
+  --shadow: var(--shadow-card);
+
+  --gradient-primary: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  --gradient-secondary: linear-gradient(160deg, var(--card-hover), var(--card));
+  --gradient-glow: radial-gradient(
+    circle,
+    rgba(129, 140, 248, 0.25),
+    transparent 70%
+  );
+  --gradient-text: linear-gradient(135deg, #a5b4fc, #67e8f9 55%, #22d3ee);
+  --surface-band: #0c0c0e;
+}

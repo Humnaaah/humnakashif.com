@@ -1,0 +1,191 @@
+/* ==========================================================================
+   FAQ.CSS
+   Two-column layout: accordion (left, card-style rows rather than one
+   continuously-divided list) + a "Book a discovery call" card (right)
+   that sits beside it, matching the reference. Numbered accordion
+   (01–05); height/opacity animate on open, indicator rotates 45° into
+   a close ("×"). No browser-default <details> styling.
+   ========================================================================== */
+
+.faq__layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.faq .section-heading {
+  margin-bottom: var(--space-7);
+}
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faq__item {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background-color: var(--card);
+  overflow: hidden;
+  transition: border-color var(--transition-fast) var(--ease-standard);
+}
+
+.faq__item:has(.faq__question[aria-expanded="true"]) {
+  border-color: var(--accent);
+}
+
+.faq__question {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  width: 100%;
+  padding: var(--space-5) var(--space-5);
+  text-align: left;
+}
+
+.faq__number {
+  flex-shrink: 0;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--accent);
+  letter-spacing: var(--ls-wide);
+}
+
+.faq__question-text {
+  flex: 1;
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--foreground);
+  transition: color var(--transition-fast) var(--ease-standard);
+}
+
+.faq__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  font-size: 1.125rem;
+  line-height: 1;
+  color: var(--foreground);
+  transition: transform var(--transition-base) var(--ease-standard),
+    background-color var(--transition-base) var(--ease-standard),
+    border-color var(--transition-base) var(--ease-standard);
+}
+
+.faq__question[aria-expanded="true"] .faq__icon {
+  transform: rotate(45deg);
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  border-color: var(--accent);
+}
+
+/* ---- Animated panel ----
+   `hidden` is toggled by JS only after the collapse transition
+   finishes (see faq.js) so the height/opacity transition is always
+   visible instead of being skipped by the attribute removing layout
+   instantly. max-height is set to a generous fixed value; the actual
+   collapse/expand distance is what animates, not to an exact px match
+   of content (kept simple, still visually seamless). */
+.faq__panel {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  padding-inline: var(--space-5);
+  transition: max-height var(--transition-base) var(--ease-standard),
+    opacity var(--transition-fast) var(--ease-standard),
+    padding-bottom var(--transition-base) var(--ease-standard);
+}
+
+.faq__panel.is-open {
+  max-height: 320px;
+  opacity: 1;
+  padding-bottom: var(--space-5);
+}
+
+.faq__panel p {
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+/* ---- "Book a discovery call" card ---- */
+
+.faq__discovery {
+  padding: var(--space-7);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  background-color: var(--card);
+}
+
+.faq__discovery-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: var(--space-5);
+}
+
+.faq__discovery-eyebrow {
+  font-size: var(--fs-body-lg);
+  color: var(--muted);
+  margin-bottom: var(--space-1);
+}
+
+.faq__discovery-heading {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  color: var(--foreground);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-4);
+}
+
+.faq__discovery-description {
+  color: var(--muted);
+  margin-bottom: var(--space-6);
+}
+
+.faq__discovery-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-right: var(--space-3);
+}
+
+.faq__discovery-brand {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--muted);
+}
+
+@media (max-width: 1024px) {
+  .faq__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .faq__question {
+    padding: var(--space-4) var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .faq__question-text {
+    font-size: var(--fs-body);
+  }
+
+  .faq__discovery {
+    padding: var(--space-6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__panel,
+  .faq__icon {
+    transition: none;
+  }
+}
