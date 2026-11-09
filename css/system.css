@@ -735,6 +735,4 @@ html { scroll-padding-top: 0; }
   white-space: nowrap;
 }
 .timeline__dates .timeline__length { color: var(--accent); margin-left: .35em; }
-.cs-modal__frame img {
-  width: -webkit-fill-available;
-}
+.cs-modal__frame .cs-modal__frame img { width: -webkit-fill-available; }
