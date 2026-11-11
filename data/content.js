@@ -318,18 +318,18 @@ const portfolio = {
   //   ],
 
   // },
-    chatbot: {
+   chatbot: {
     launcherLabel: "Ask my AI",
     panelTitle: "Ask about Humna’s work",
-    statusText: "answered quickly by AI",
+    statusText: "Design and development, answered quickly",
     greeting: "Hi! I’m {name}’s assistant.",
     subtext: "Quick answers for recruiters and hiring teams. Pick a question or type your own.",
     inputPlaceholder: "Ask about the work...",
     moreQuestionsLabel: "More questions",
     fallbackMessage:
-      "I don’t have that listed yet, but I can tell you about her government, healthcare, franchise and AI product work, her design system experience, her frontend development, or how to get in touch.",
+      "I don’t have that listed yet, but I can tell you about her projects, government, healthcare, franchise and AI work, her design system experience, her frontend development, or how to get in touch.",
     primaryPrompts: [
-      { id: "projects", icon: "○", label: "Show me her strongest projects" },
+      { id: "projects", icon: "○", label: "Show me her projects" },
       { id: "government", icon: "◇", label: "Has she built government platforms?" },
       { id: "franchise", icon: "↻", label: "What franchise and e-commerce work has she done?" },
       { id: "ai", icon: "→", label: "How does she design AI experiences?" },
