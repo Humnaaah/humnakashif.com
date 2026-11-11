@@ -58,9 +58,17 @@
     downloadLink.href = url;
 
     const canEmbed = navigator.pdfViewerEnabled !== false;
+    const isImage = /\.(webp|png|jpe?g|gif|avif|svg)(\?|#|$)/i.test(url);
     bodyEl.innerHTML = "";
 
-    if (canEmbed) {
+
+      if (isImage) {
+      const img = document.createElement("img");
+      img.className = "cs-modal__image";
+      img.src = url;
+      img.alt = (title || "Case study") + " overview";
+      bodyEl.appendChild(img);
+    } else if (canEmbed) {
       const frame = document.createElement("iframe");
       frame.className = "cs-modal__frame";
       frame.title = (title || "Case study") + " (PDF)";
@@ -75,6 +83,7 @@
       bodyEl.appendChild(fallback);
     }
 
+     
     dialog.hidden = false;
     document.documentElement.classList.add("cs-lock");
     // next frame so the transition runs
