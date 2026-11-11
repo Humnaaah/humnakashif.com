@@ -116,6 +116,15 @@ html.cs-lock {
   flex: 1;
   min-height: 0;
   background: var(--background-elevated);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.cs-modal__image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 .cs-modal__frame {
