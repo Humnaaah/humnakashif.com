@@ -243,7 +243,7 @@
   //   "about",
   // ];
 
-    const INTENTS = {
+     const INTENTS = {
     about: {
       keywords: ["who is", "who are you", "about you", "introduce", "background", "help a product team", "deliver"],
       build(k) {
@@ -270,8 +270,8 @@
       keywords: ["build", "code", "develop", "frontend", "front end", "front-end", "react", "javascript", "cms", "wordpress", "shopify", "webflow", "website", "next"],
       build(k) {
         return {
-          text: k.name + " builds what she designs. She has built responsive frontends with HTML, CSS, JavaScript and React, including the Ministry of Justice website, and many live CMS sites across e-commerce, NGO, healthcare and company websites.",
-          actions: [{ label: "See development work", target: "#expertise" }],
+          text: k.name + " builds what she designs. She built the frontends of the Ministry of Justice website and the Adl platform, the Naranga marketing website and the Aibers healthcare apps, and many live CMS sites across e-commerce, NGO, healthcare and company websites.",
+          actions: [{ label: "See the work", target: "#projects" }],
           followups: ["government", "tools", "contact"],
         };
       },
@@ -281,8 +281,8 @@
       keywords: ["ai", "artificial intelligence", "automat", "intelligent", "agent", "conversational", "copilot", "chatbot"],
       build(k) {
         return {
-          text: k.name + " designs AI features that stay clear and user-controlled. Examples include an AI coach that suggests next steps while the user stays in charge (Habitus), AI search and assistants in franchise and justice platforms (Emax, the Adl portal), and AI-powered workflows and agent experiences at TechUnicorn / CXUnicorn.",
-          actions: [{ label: "See AI UX examples", target: "#ai-experience" }],
+          text: k.name + " designs AI features that stay clear and user-controlled. Habitus has an AI coach that suggests next steps while the user decides, and Emax has AI search for franchise teams. She also works on AI-powered workflows and agent experiences.",
+          actions: [{ label: "See AI UX examples", target: "#ai-experience" }, { label: "See projects", target: "#projects" }],
           followups: ["government", "franchise", "projects"],
         };
       },
@@ -292,8 +292,8 @@
       keywords: ["government", "ministry", "justice", "kuwait", "public sector", "public service", "legal", "court", "law", "gov"],
       build(k) {
         return {
-          text: k.name + " has designed, and built the frontend for, digital services for the Ministry of Justice, State of Kuwait: the official website, the Adl digital services platform, and a bilingual Laws and Decision Portal with an admin tool. She also created the Tawtheeq design system for the ministry’s products, and has worked on court and legal technology for TechUnicorn.",
-          actions: [{ label: "See government work", target: "#projects" }],
+          text: k.name + " has worked on digital services for the Ministry of Justice, State of Kuwait: the bilingual Laws and Decision Portal, the official ministry website, the Adl digital services platform and the ministry’s design system. She also designed a brochure for a digital courtroom platform.",
+          actions: [{ label: "See all projects", target: "#projects" }],
           followups: ["designsystem", "ai", "contact"],
         };
       },
@@ -303,19 +303,19 @@
       keywords: ["health", "healthcare", "medical", "doctor", "patient", "hospital", "clinic", "wellness", "habit", "fitness"],
       build(k) {
         return {
-          text: k.name + " has designed healthcare and wellness products: Aibers, a two-sided system with a patient app (appointments, doctor search, follow-ups) and a doctor dashboard (live queue, analytics, prescriptions), plus work for the Ministry of Health Kuwait and Habitus, an AI-coached habit tracker.",
-          actions: [{ label: "See healthcare work", target: "#projects" }],
+          text: k.name + " has designed healthcare and wellness products: the Aibers patient app (find doctors, manage appointments, follow up after visits), the Aibers doctor dashboard (appointments, patients and prescriptions) and Habitus, a habit tracker with an AI coach.",
+          actions: [{ label: "See all projects", target: "#projects" }],
           followups: ["ai", "frontend", "contact"],
         };
       },
     },
 
     franchise: {
-      keywords: ["franchise", "e-commerce", "ecommerce", "retail", "edible", "emax", "naranga", "berry", "store", "pos", "point of sale", "shop"],
+      keywords: ["franchise", "e-commerce", "ecommerce", "retail", "edible", "emax", "naranga", "store", "pos", "point of sale", "shop"],
       build(k) {
         return {
-          text: k.name + " has worked on franchise and retail products: Edible Arrangements (a store management and point-of-sale system), Emax (an AI-powered franchise mobile app for updates, training and messaging), the Naranga franchise-operations website and the Berry Direct corporate website.",
-          actions: [{ label: "See franchise work", target: "#projects" }],
+          text: k.name + " has worked on franchise and retail products: Emax (an AI-powered franchise mobile app for updates, training and messaging), a store management and point-of-sale system for Edible Arrangements, and a marketing website for a franchise operations platform.",
+          actions: [{ label: "See all projects", target: "#projects" }],
           followups: ["ai", "designsystem", "frontend"],
         };
       },
@@ -325,8 +325,8 @@
       keywords: ["design system", "component", "style guide", "brand guideline", "tokens", "guidelines", "consistency", "tawtheeq"],
       build(k) {
         return {
-          text: k.name + " creates design systems that keep products consistent. Tawtheeq, the Ministry of Justice design and brand guideline, defines colours, Arabic and English typography, icons, responsive grids and components, and she has built reusable component libraries for store and franchise platforms.",
-          actions: [{ label: "See design systems", target: "#projects" }],
+          text: k.name + " creates design systems that keep products consistent. For the Ministry of Justice she created a bilingual design system and brand guidelines covering colours, Arabic and English typography, icons, grids and components.",
+          actions: [{ label: "See all projects", target: "#projects" }],
           followups: ["government", "frontend", "process"],
         };
       },
@@ -336,8 +336,14 @@
       keywords: ["project", "best work", "built", "portfolio", "show me", "case study", "worked on", "work on", "strongest"],
       build(k) {
         return {
-          text: "Start with the <strong>Operations Management Platform</strong> case study: it walks through the problem, research, design decisions and goals step by step. For government work, open the <strong>Ministry of Justice</strong> projects. For healthcare, see <strong>Aibers</strong>. For franchise platforms, see <strong>Edible Arrangements</strong> and <strong>Emax</strong>.",
-          actions: [{ label: "Open featured case study", target: "project/operations-management-platform.html" }, { label: "All projects", target: "#projects" }],
+          text: "Here is a quick map of the work:<br><br>" +
+            "<strong>Government:</strong> Laws and Decision Portal, Ministry of Justice website, Adl platform, Ministry design system<br>" +
+            "<strong>Healthcare:</strong> Aibers patient app, Aibers doctor dashboard<br>" +
+            "<strong>Franchise and retail:</strong> Emax, Edible store management, franchise operations website<br>" +
+            "<strong>AI and wellness:</strong> Habitus<br>" +
+            "<strong>Brand:</strong> digital courtroom brochure<br><br>" +
+            "Open any card in the Work section for the full case study.",
+          actions: [{ label: "See all projects", target: "#projects" }],
           followups: ["government", "healthcare", "franchise"],
         };
       },
@@ -384,8 +390,8 @@
       keywords: ["industr", "categor", "sector", "type of project", "kinds of", "saas", "enterprise"],
       build(k) {
         return {
-          text: k.name + " has worked across government and legal, healthcare and wellness, franchise and e-commerce, SaaS, AI, fintech and corporate websites.",
-          actions: [{ label: "View the work", target: "#projects" }],
+          text: k.name + " has worked across government and legal, healthcare and wellness, franchise and retail, SaaS, AI and corporate websites.",
+          actions: [{ label: "See all projects", target: "#projects" }],
           followups: ["government", "healthcare", "franchise"],
         };
       },
@@ -426,7 +432,7 @@
       },
     },
   };
-
+   
   const INTENT_ORDER = [
     "contact",
     "availability",
